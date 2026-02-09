@@ -53,6 +53,7 @@ CloudVLAN is an overlay network platform for enterprises that need secure, compl
 - [SaaS Deployment](operations/deployment/saas.md)
 
 ### Project Status
+- [Features](features.md) — Current and planned features
 - [STATUS.md](STATUS.md) — What's built, what's planned, vs Headscale comparison
 - [Business Vision](business/vision.md)
 - [Competitive Landscape](business/competitive-landscape.md)
