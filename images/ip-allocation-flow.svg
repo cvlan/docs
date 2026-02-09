@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 620" font-family="Arial, Helvetica, sans-serif">
+  <text x="350" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">IP Allocation Algorithm</text>
+  <text x="350" y="46" text-anchor="middle" font-size="11" fill="#888">Two fast paths + fallback gap scan</text>
+
+  <!-- Start -->
+  <rect x="270" y="65" width="160" height="36" rx="18" fill="#4A90D9"/>
+  <text x="350" y="88" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Allocate IP</text>
+
+  <!-- Arrow down -->
+  <line x1="350" y1="101" x2="350" y2="125" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Decision: first_free set? -->
+  <polygon points="350,125 460,165 350,205 240,165" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="350" y="162" text-anchor="middle" font-size="11" fill="#333">first_free</text>
+  <text x="350" y="175" text-anchor="middle" font-size="11" fill="#333">set?</text>
+
+  <!-- YES branch left -->
+  <text x="225" y="158" font-size="10" font-weight="bold" fill="#5CB85C">YES</text>
+  <line x1="240" y1="165" x2="130" y2="165" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arr-g)"/>
+
+  <!-- Fast Path 1 box -->
+  <rect x="20" y="140" width="110" height="50" rx="6" fill="#5CB85C"/>
+  <text x="75" y="160" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Fast Path 1</text>
+  <text x="75" y="175" text-anchor="middle" font-size="9" fill="#D4F0D4">O(1) reuse gap</text>
+
+  <!-- Arrow down from fast path 1 -->
+  <line x1="75" y1="190" x2="75" y2="220" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Skip reserved? -->
+  <rect x="20" y="220" width="110" height="35" rx="4" fill="#FFF5F5" stroke="#E74C3C" stroke-width="1"/>
+  <text x="75" y="242" text-anchor="middle" font-size="10" fill="#333">Skip reserved?</text>
+
+  <!-- Arrow down -->
+  <line x1="75" y1="255" x2="75" y2="280" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Allocate -->
+  <rect x="20" y="280" width="110" height="35" rx="6" fill="#4A90D9"/>
+  <text x="75" y="302" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Allocate IP</text>
+
+  <!-- Arrow down to clear first_free -->
+  <line x1="75" y1="315" x2="75" y2="340" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="10" y="340" width="130" height="30" rx="4" fill="#F0F0F0" stroke="#CCC"/>
+  <text x="75" y="360" text-anchor="middle" font-size="9" fill="#666">Clear first_free</text>
+
+  <!-- Arrow to done -->
+  <line x1="75" y1="370" x2="75" y2="400" stroke="#555" stroke-width="1.5"/>
+  <line x1="75" y1="400" x2="350" y2="540" stroke="#555" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- NO branch right -->
+  <text x="465" y="158" font-size="10" font-weight="bold" fill="#E74C3C">NO</text>
+  <line x1="460" y1="165" x2="530" y2="165" stroke="#E74C3C" stroke-width="1.5" marker-end="url(#arr-r)"/>
+
+  <!-- Decision: next_offset < max? -->
+  <polygon points="600,125 680,165 600,205 520,165" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="600" y="162" text-anchor="middle" font-size="10" fill="#333">next_offset</text>
+  <text x="600" y="175" text-anchor="middle" font-size="10" fill="#333">&lt; max?</text>
+
+  <!-- YES down -->
+  <text x="610" y="218" font-size="10" font-weight="bold" fill="#5CB85C">YES</text>
+  <line x1="600" y1="205" x2="600" y2="250" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arr-g)"/>
+
+  <!-- Fast Path 2 -->
+  <rect x="540" y="250" width="120" height="50" rx="6" fill="#5CB85C"/>
+  <text x="600" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Fast Path 2</text>
+  <text x="600" y="285" text-anchor="middle" font-size="9" fill="#D4F0D4">O(1) watermark++</text>
+
+  <!-- Arrow down -->
+  <line x1="600" y1="300" x2="600" y2="325" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="540" y="325" width="120" height="35" rx="4" fill="#FFF5F5" stroke="#E74C3C" stroke-width="1"/>
+  <text x="600" y="347" text-anchor="middle" font-size="10" fill="#333">Skip reserved?</text>
+
+  <!-- Arrow down -->
+  <line x1="600" y1="360" x2="600" y2="385" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="540" y="385" width="120" height="35" rx="6" fill="#4A90D9"/>
+  <text x="600" y="407" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Allocate IP</text>
+
+  <!-- Arrow down to increment -->
+  <line x1="600" y1="420" x2="600" y2="445" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="535" y="445" width="130" height="30" rx="4" fill="#F0F0F0" stroke="#CCC"/>
+  <text x="600" y="465" text-anchor="middle" font-size="9" fill="#666">next_offset += 1</text>
+
+  <!-- Arrow to done -->
+  <line x1="600" y1="475" x2="600" y2="500" stroke="#555" stroke-width="1"/>
+  <line x1="600" y1="500" x2="350" y2="540" stroke="#555" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- NO right from watermark decision -->
+  <text x="688" y="158" font-size="10" font-weight="bold" fill="#E74C3C">NO</text>
+
+  <!-- Gap scan path (below, center) -->
+  <line x1="680" y1="165" x2="680" y2="340" stroke="#E74C3C" stroke-width="1.5"/>
+  <line x1="680" y1="340" x2="410" y2="340" stroke="#E74C3C" stroke-width="1.5" marker-end="url(#arr-r)"/>
+
+  <!-- Gap scan -->
+  <rect x="270" y="320" width="140" height="50" rx="6" fill="#F0AD4E"/>
+  <text x="340" y="340" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Gap Scan</text>
+  <text x="340" y="355" text-anchor="middle" font-size="9" fill="white">O(n) — scan all IPs</text>
+
+  <!-- Decision: found gap? -->
+  <line x1="340" y1="370" x2="340" y2="400" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <polygon points="340,400 420,430 340,460 260,430" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="340" y="434" text-anchor="middle" font-size="10" fill="#333">Found?</text>
+
+  <!-- YES -->
+  <text x="248" y="425" font-size="10" font-weight="bold" fill="#5CB85C">YES</text>
+  <line x1="260" y1="430" x2="200" y2="430" stroke="#5CB85C" stroke-width="1.5"/>
+  <line x1="200" y1="430" x2="200" y2="540" stroke="#555" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="200" y1="540" x2="290" y2="540" stroke="#555" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- NO -->
+  <text x="425" y="425" font-size="10" font-weight="bold" fill="#E74C3C">NO</text>
+  <line x1="420" y1="430" x2="490" y2="430" stroke="#E74C3C" stroke-width="1.5" marker-end="url(#arr-r)"/>
+
+  <!-- 409 Conflict -->
+  <rect x="490" y="415" width="120" height="32" rx="6" fill="#E74C3C"/>
+  <text x="550" y="436" text-anchor="middle" font-size="11" font-weight="bold" fill="white">409 Conflict</text>
+  <text x="550" y="460" text-anchor="middle" font-size="9" fill="#999">CIDR exhausted</text>
+
+  <!-- Done -->
+  <rect x="290" y="525" width="120" height="36" rx="18" fill="#5CB85C"/>
+  <text x="350" y="548" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Return IP</text>
+
+  <!-- Legend -->
+  <rect x="20" y="570" width="660" height="40" rx="6" fill="#F8F8F8" stroke="#E0E0E0"/>
+  <text x="40" y="592" font-size="10" fill="#666">Reserved IPs: /24 → .1 and .254 | /16 → .0.1 and .255.254 | Per-CVLAN mutex allocator | Tenant-isolated CIDRs</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#555"/></marker>
+    <marker id="arr-g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#5CB85C"/></marker>
+    <marker id="arr-r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#E74C3C"/></marker>
+  </defs>
+</svg>

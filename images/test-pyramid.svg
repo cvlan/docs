@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480" font-family="Arial, Helvetica, sans-serif">
+  <text x="350" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Test Pyramid</text>
+  <text x="350" y="46" text-anchor="middle" font-size="11" fill="#888">Actual test counts as of Feb 2026</text>
+
+  <!-- Pyramid (bottom-up) -->
+
+  <!-- Level 1: Unit tests (base, widest) -->
+  <polygon points="100,380 600,380 530,295 170,295" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1.5"/>
+  <text x="350" y="330" text-anchor="middle" font-size="16" font-weight="bold" fill="white">Unit Tests</text>
+  <text x="350" y="350" text-anchor="middle" font-size="12" fill="#D4F0D4">210 tests (199 cvlan + 11 client)</text>
+  <text x="350" y="368" text-anchor="middle" font-size="10" fill="#D4F0D4">Fast, isolated, mock dependencies</text>
+
+  <!-- Level 2: Integration tests -->
+  <polygon points="170,295 530,295 470,215 230,215" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1.5"/>
+  <text x="350" y="248" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Integration Tests</text>
+  <text x="350" y="268" text-anchor="middle" font-size="11" fill="#D4E6F9">328 tests (cvlan, real Postgres)</text>
+  <text x="350" y="285" text-anchor="middle" font-size="10" fill="#D4E6F9">Full API + DB round-trips</text>
+
+  <!-- Level 3: Load tests -->
+  <polygon points="230,215 470,215 420,150 280,150" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1.5"/>
+  <text x="350" y="177" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Load Tests</text>
+  <text x="350" y="195" text-anchor="middle" font-size="10" fill="white">21K ops/s, 200 concurrency</text>
+
+  <!-- Level 4: E2E (top, narrowest) -->
+  <polygon points="280,150 420,150 380,85 320,85" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/>
+  <text x="350" y="112" text-anchor="middle" font-size="13" font-weight="bold" fill="white">E2E</text>
+  <text x="350" y="130" text-anchor="middle" font-size="10" fill="white">6 scenarios</text>
+
+  <!-- Right side: detailed breakdowns -->
+  <rect x="620" y="85" width="55" height="22" rx="4" fill="#E74C3C"/>
+  <text x="647" y="101" text-anchor="middle" font-size="9" font-weight="bold" fill="white">E2E</text>
+  <line x1="600" y1="115" x2="620" y2="100" stroke="#E74C3C" stroke-width="1"/>
+
+  <rect x="545" y="155" width="130" height="50" rx="4" fill="#FDF2E3" stroke="#F0AD4E" stroke-width="1"/>
+  <text x="610" y="173" text-anchor="middle" font-size="9" font-weight="bold" fill="#E09C3E">Load Test Details</text>
+  <text x="610" y="188" text-anchor="middle" font-size="8" fill="#666">200 concurrent requests</text>
+  <text x="610" y="198" text-anchor="middle" font-size="8" fill="#666">p99 &lt; 10ms target</text>
+
+  <rect x="545" y="215" width="130" height="65" rx="4" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1"/>
+  <text x="610" y="233" text-anchor="middle" font-size="9" font-weight="bold" fill="#4A90D9">Integration Details</text>
+  <text x="610" y="248" text-anchor="middle" font-size="8" fill="#666">Tenant CRUD (52)</text>
+  <text x="610" y="258" text-anchor="middle" font-size="8" fill="#666">Node lifecycle (78)</text>
+  <text x="610" y="268" text-anchor="middle" font-size="8" fill="#666">Policy + ACL (45)</text>
+  <text x="610" y="278" text-anchor="middle" font-size="8" fill="#666">+ 153 more...</text>
+
+  <rect x="545" y="295" width="130" height="65" rx="4" fill="#F0FAF0" stroke="#5CB85C" stroke-width="1"/>
+  <text x="610" y="313" text-anchor="middle" font-size="9" font-weight="bold" fill="#5CB85C">Unit Test Details</text>
+  <text x="610" y="328" text-anchor="middle" font-size="8" fill="#666">cvlan-api: 199</text>
+  <text x="610" y="338" text-anchor="middle" font-size="8" fill="#666">cvlan-ctrl: 11</text>
+  <text x="610" y="348" text-anchor="middle" font-size="8" fill="#666">cvland: 2</text>
+
+  <!-- Coverage bar -->
+  <rect x="30" y="400" width="640" height="65" rx="8" fill="#F8F8F8" stroke="#E0E0E0"/>
+  <text x="350" y="422" text-anchor="middle" font-size="12" font-weight="bold" fill="#555">Code Coverage</text>
+
+  <!-- Coverage bars -->
+  <rect x="50" y="432" width="260" height="18" rx="3" fill="#EEE"/>
+  <rect x="50" y="432" width="124" height="18" rx="3" fill="#4A90D9"/>
+  <text x="180" y="445" text-anchor="middle" font-size="9" font-weight="bold" fill="white">47.5% line (cvlan)</text>
+
+  <rect x="340" y="432" width="260" height="18" rx="3" fill="#EEE"/>
+  <rect x="340" y="432" width="66" height="18" rx="3" fill="#95A5A6"/>
+  <text x="470" y="445" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">25.5% aggregate</text>
+</svg>

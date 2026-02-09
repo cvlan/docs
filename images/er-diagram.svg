@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 580" font-family="Arial, Helvetica, sans-serif">
+  <text x="430" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Entity Relationship Diagram</text>
+  <text x="430" y="46" text-anchor="middle" font-size="11" fill="#888">PostgreSQL schema — multi-tenant with tenant isolation</text>
+
+  <defs>
+    <marker id="er-a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#555"/></marker>
+    <marker id="er-crow" markerWidth="12" markerHeight="10" refX="0" refY="5" orient="auto">
+      <line x1="0" y1="0" x2="12" y2="5" stroke="#555" stroke-width="1.5"/>
+      <line x1="0" y1="10" x2="12" y2="5" stroke="#555" stroke-width="1.5"/>
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#555" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <!-- TENANTS -->
+  <rect x="330" y="65" width="200" height="100" rx="6" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1.5"/>
+  <rect x="330" y="65" width="200" height="28" rx="6" fill="#3A7BC8"/>
+  <text x="430" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="white">tenants</text>
+  <text x="340" y="108" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="340" y="121" font-size="9" fill="white">name, slug (unique)</text>
+  <text x="340" y="134" font-size="9" fill="white">signing_pubkey (Ed25519)</text>
+  <text x="340" y="147" font-size="9" fill="white">status, created_at, updated_at</text>
+
+  <!-- CVLANS -->
+  <rect x="30" y="210" width="200" height="115" rx="6" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1.5"/>
+  <rect x="30" y="210" width="200" height="28" rx="6" fill="#3A7BC8"/>
+  <text x="130" y="229" text-anchor="middle" font-size="13" font-weight="bold" fill="white">cvlans</text>
+  <text x="40" y="253" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="40" y="266" font-size="9" fill="white">tenant_id (FK → tenants)</text>
+  <text x="40" y="279" font-size="9" fill="white">name, cidr, cidr_v6</text>
+  <text x="40" y="292" font-size="9" fill="white">next_offset, first_free</text>
+  <text x="40" y="305" font-size="9" fill="white">allocated_count, reserved_ips</text>
+
+  <!-- Tenant → CVLANs (1:N) -->
+  <line x1="330" y1="140" x2="230" y2="230" stroke="#555" stroke-width="1.5" marker-end="url(#er-crow)"/>
+  <text x="265" y="175" font-size="9" fill="#555">1:N</text>
+
+  <!-- NODES -->
+  <rect x="30" y="370" width="200" height="115" rx="6" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1.5"/>
+  <rect x="30" y="370" width="200" height="28" rx="6" fill="#E09C3E"/>
+  <text x="130" y="389" text-anchor="middle" font-size="13" font-weight="bold" fill="white">nodes</text>
+  <text x="40" y="413" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="40" y="426" font-size="9" fill="white">cvlan_id (FK → cvlans)</text>
+  <text x="40" y="439" font-size="9" fill="white">name, wg_pubkey, mac</text>
+  <text x="40" y="452" font-size="9" fill="white">assigned_ip, assigned_ip6</text>
+  <text x="40" y="465" font-size="9" fill="white">status, last_seen, endpoints</text>
+
+  <!-- CVLAN → Nodes (1:N) -->
+  <line x1="130" y1="325" x2="130" y2="370" stroke="#555" stroke-width="1.5" marker-end="url(#er-crow)"/>
+  <text x="140" y="350" font-size="9" fill="#555">1:N</text>
+
+  <!-- USERS -->
+  <rect x="560" y="210" width="200" height="100" rx="6" fill="#5BC0DE" stroke="#46B0CE" stroke-width="1.5"/>
+  <rect x="560" y="210" width="200" height="28" rx="6" fill="#46B0CE"/>
+  <text x="660" y="229" text-anchor="middle" font-size="13" font-weight="bold" fill="white">users</text>
+  <text x="570" y="253" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="570" y="266" font-size="9" fill="white">tenant_id (FK → tenants)</text>
+  <text x="570" y="279" font-size="9" fill="white">email (unique), name</text>
+  <text x="570" y="292" font-size="9" fill="white">role, password_hash, status</text>
+
+  <!-- Tenant → Users (1:N) -->
+  <line x1="530" y1="140" x2="610" y2="230" stroke="#555" stroke-width="1.5" marker-end="url(#er-crow)"/>
+  <text x="585" y="175" font-size="9" fill="#555">1:N</text>
+
+  <!-- GROUPS -->
+  <rect x="560" y="340" width="200" height="85" rx="6" fill="#5BC0DE" stroke="#46B0CE" stroke-width="1.5"/>
+  <rect x="560" y="340" width="200" height="28" rx="6" fill="#46B0CE"/>
+  <text x="660" y="359" text-anchor="middle" font-size="13" font-weight="bold" fill="white">groups</text>
+  <text x="570" y="383" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="570" y="396" font-size="9" fill="white">tenant_id (FK → tenants)</text>
+  <text x="570" y="409" font-size="9" fill="white">name, description</text>
+
+  <!-- Users → Groups (M:N via group_members) -->
+  <line x1="660" y1="310" x2="660" y2="340" stroke="#555" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="670" y="328" font-size="8" fill="#999">M:N</text>
+
+  <!-- POLICIES -->
+  <rect x="290" y="370" width="200" height="100" rx="6" fill="#9B59B6" stroke="#8E44AD" stroke-width="1.5"/>
+  <rect x="290" y="370" width="200" height="28" rx="6" fill="#8E44AD"/>
+  <text x="390" y="389" text-anchor="middle" font-size="13" font-weight="bold" fill="white">policies</text>
+  <text x="300" y="413" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="300" y="426" font-size="9" fill="white">tenant_id (FK → tenants)</text>
+  <text x="300" y="439" font-size="9" fill="white">name, action (allow/deny)</text>
+  <text x="300" y="452" font-size="9" fill="white">src_groups, dst_groups</text>
+
+  <!-- Tenant → Policies (1:N) -->
+  <line x1="430" y1="165" x2="390" y2="370" stroke="#555" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#er-crow)"/>
+
+  <!-- VROUTERS -->
+  <rect x="290" y="210" width="200" height="100" rx="6" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1.5"/>
+  <rect x="290" y="210" width="200" height="28" rx="6" fill="#4CAE4C"/>
+  <text x="390" y="229" text-anchor="middle" font-size="13" font-weight="bold" fill="white">vrouters</text>
+  <text x="300" y="253" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="300" y="266" font-size="9" fill="white">region_id (FK → regions)</text>
+  <text x="300" y="279" font-size="9" fill="white">name, wg_pubkey, wg_endpoint</text>
+  <text x="300" y="292" font-size="9" fill="white">status, last_seen, stats</text>
+
+  <!-- API KEYS -->
+  <rect x="630" y="65" width="200" height="85" rx="6" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5"/>
+  <rect x="630" y="65" width="200" height="28" rx="6" fill="#7F8C8D"/>
+  <text x="730" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="white">api_keys</text>
+  <text x="640" y="108" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="640" y="121" font-size="9" fill="white">tenant_id, key_hash (Argon2)</text>
+  <text x="640" y="134" font-size="9" fill="white">name, scopes, expires_at</text>
+
+  <!-- AUDIT LOGS -->
+  <rect x="30" y="65" width="200" height="100" rx="6" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5"/>
+  <rect x="30" y="65" width="200" height="28" rx="6" fill="#7F8C8D"/>
+  <text x="130" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="white">audit_logs</text>
+  <text x="40" y="108" font-size="9" fill="white">id (BIGSERIAL PK)</text>
+  <text x="40" y="121" font-size="9" fill="white">tenant_id, user_id, action</text>
+  <text x="40" y="134" font-size="9" fill="white">resource_type, resource_id</text>
+  <text x="40" y="147" font-size="9" fill="white">details (JSONB), created_at</text>
+
+  <!-- REGIONS -->
+  <rect x="630" y="440" width="200" height="75" rx="6" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5"/>
+  <rect x="630" y="440" width="200" height="28" rx="6" fill="#7F8C8D"/>
+  <text x="730" y="459" text-anchor="middle" font-size="13" font-weight="bold" fill="white">regions</text>
+  <text x="640" y="483" font-size="9" fill="white">id (UUID PK)</text>
+  <text x="640" y="496" font-size="9" fill="white">name, provider, location</text>
+
+  <!-- Region → VRouters (1:N) -->
+  <line x1="630" y1="470" x2="490" y2="280" stroke="#555" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#er-crow)"/>
+  <text x="570" y="370" font-size="8" fill="#999">1:N</text>
+
+  <!-- Stats bar -->
+  <rect x="30" y="530" width="800" height="35" rx="6" fill="#F8F8F8" stroke="#E0E0E0"/>
+  <text x="140" y="552" text-anchor="middle" font-size="10" fill="#555">10+ tables</text>
+  <line x1="230" y1="537" x2="230" y2="558" stroke="#E0E0E0"/>
+  <text x="340" y="552" text-anchor="middle" font-size="10" fill="#555">Tenant isolation on all queries</text>
+  <line x1="470" y1="537" x2="470" y2="558" stroke="#E0E0E0"/>
+  <text x="580" y="552" text-anchor="middle" font-size="10" fill="#555">90-day audit retention</text>
+  <line x1="670" y1="537" x2="670" y2="558" stroke="#E0E0E0"/>
+  <text x="760" y="552" text-anchor="middle" font-size="10" fill="#555">SQLx 0.8 + Postgres</text>
+</svg>

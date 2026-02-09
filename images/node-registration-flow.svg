@@ -1,0 +1,76 @@
+<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333" />
+    </marker>
+    <marker id="arrowhead-dashed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#95A5A6" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333" text-anchor="middle">Node Registration Flow</text>
+
+  <!-- Actors -->
+  <rect x="50" y="70" width="120" height="50" fill="#95A5A6" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="110" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Admin</text>
+
+  <rect x="270" y="70" width="120" height="50" fill="#4A90D9" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="330" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">cvlan-api</text>
+
+  <rect x="490" y="70" width="120" height="50" fill="#5CB85C" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="550" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">step-ca</text>
+
+  <rect x="710" y="70" width="140" height="50" fill="#F0AD4E" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="780" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">cvlan-ctrl</text>
+  <text x="780" y="112" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">(node)</text>
+
+  <!-- Lifelines -->
+  <line x1="110" y1="120" x2="110" y2="650" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="330" y1="120" x2="330" y2="650" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="550" y1="120" x2="550" y2="650" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="780" y1="120" x2="780" y2="650" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Step 1: Admin → cvlan-api: Create token -->
+  <line x1="110" y1="160" x2="330" y2="160" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="220" y="150" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">1. Create registration token</text>
+
+  <!-- Step 2: Admin → cvlan-ctrl: Configure (dashed) -->
+  <line x1="110" y1="210" x2="780" y2="210" stroke="#95A5A6" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead-dashed)"/>
+  <text x="445" y="200" font-family="Arial, sans-serif" font-size="11" fill="#95A5A6" text-anchor="middle">2. Configure (out of band)</text>
+
+  <!-- Step 3: cvlan-ctrl → cvlan-api: GET /client/discover -->
+  <line x1="780" y1="260" x2="330" y2="260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="555" y="250" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">3. GET /client/discover?tenant=acme</text>
+
+  <!-- Step 4: cvlan-api → cvlan-ctrl: controller URL -->
+  <line x1="330" y1="290" x2="780" y2="290" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="555" y="280" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">4. Return controller URL</text>
+
+  <!-- Step 5: cvlan-ctrl → cvlan-api: POST /client/register -->
+  <line x1="780" y1="340" x2="330" y2="340" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="555" y="330" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">5. POST /client/register</text>
+  <text x="555" y="345" font-family="Arial, sans-serif" font-size="10" fill="#666" text-anchor="middle">(token + WG pubkey + MAC)</text>
+
+  <!-- Step 6: cvlan-api → step-ca: Mint certificate -->
+  <line x1="330" y1="390" x2="550" y2="390" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="440" y="380" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">6. Mint X.509 certificate</text>
+
+  <!-- Step 7: step-ca → cvlan-api: Certificate + key -->
+  <line x1="550" y1="420" x2="330" y2="420" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="440" y="410" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">7. Certificate + key</text>
+
+  <!-- Step 8: cvlan-api → cvlan-ctrl: Response -->
+  <line x1="330" y1="470" x2="780" y2="470" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="555" y="460" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">8. node_id, cert, assigned_ip,</text>
+  <text x="555" y="475" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">peers, DERP map</text>
+
+  <!-- Step 9: cvlan-ctrl → cvlan-api: POST /client/poll (ongoing) -->
+  <path d="M 780 540 Q 820 540, 820 570 Q 820 600, 780 600" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="840" y="570" font-family="Arial, sans-serif" font-size="11" fill="#333">9. POST /client/poll</text>
+  <text x="840" y="585" font-family="Arial, sans-serif" font-size="10" fill="#666">(ongoing)</text>
+
+  <!-- Note at bottom -->
+  <rect x="50" y="620" width="800" height="30" fill="#f9f9f9" stroke="#333" stroke-width="1" rx="3"/>
+  <text x="450" y="640" font-family="Arial, sans-serif" font-size="11" fill="#333" text-anchor="middle">Registration token is single-use, Ed25519-signed, contains tenant + constraints</text>
+</svg>

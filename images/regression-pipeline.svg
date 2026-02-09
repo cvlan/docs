@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" font-family="Arial, Helvetica, sans-serif">
+  <text x="430" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Regression Pipeline</text>
+  <text x="430" y="46" text-anchor="middle" font-size="11" fill="#888">7 stages — accept/reject voting with delta baselines</text>
+
+  <!-- Pipeline arrow -->
+  <line x1="30" y1="130" x2="830" y2="130" stroke="#DDD" stroke-width="4"/>
+
+  <!-- Stage 1: Build -->
+  <rect x="20" y="70" width="100" height="50" rx="8" fill="#333"/>
+  <text x="70" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="white">1. Build</text>
+  <text x="70" y="108" text-anchor="middle" font-size="9" fill="#AAA">Compile all</text>
+  <circle cx="70" cy="130" r="8" fill="#333" stroke="white" stroke-width="2"/>
+
+  <rect x="20" y="150" width="100" height="50" rx="4" fill="#F8F8F8" stroke="#DDD"/>
+  <text x="70" y="167" text-anchor="middle" font-size="8" fill="#333">Docker images:</text>
+  <text x="70" y="179" text-anchor="middle" font-size="8" fill="#666">cvlan-api</text>
+  <text x="70" y="191" text-anchor="middle" font-size="8" fill="#666">vrouter, ui</text>
+
+  <!-- Stage 2: Static -->
+  <rect x="135" y="70" width="100" height="50" rx="8" fill="#9B59B6"/>
+  <text x="185" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="white">2. Static</text>
+  <text x="185" y="108" text-anchor="middle" font-size="9" fill="#D4B8E8">Lint + fmt</text>
+  <circle cx="185" cy="130" r="8" fill="#9B59B6" stroke="white" stroke-width="2"/>
+
+  <rect x="135" y="150" width="100" height="50" rx="4" fill="#F8F8F8" stroke="#DDD"/>
+  <text x="185" y="167" text-anchor="middle" font-size="8" fill="#333">clippy (Rust)</text>
+  <text x="185" y="179" text-anchor="middle" font-size="8" fill="#666">rustfmt --check</text>
+  <text x="185" y="191" text-anchor="middle" font-size="8" fill="#666">eslint (UI)</text>
+
+  <!-- Stage 3: Unit -->
+  <rect x="250" y="70" width="100" height="50" rx="8" fill="#5CB85C"/>
+  <text x="300" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="white">3. Unit</text>
+  <text x="300" y="108" text-anchor="middle" font-size="9" fill="#D4F0D4">210 tests</text>
+  <circle cx="300" cy="130" r="8" fill="#5CB85C" stroke="white" stroke-width="2"/>
+
+  <rect x="250" y="150" width="100" height="50" rx="4" fill="#F8F8F8" stroke="#DDD"/>
+  <text x="300" y="167" text-anchor="middle" font-size="8" fill="#333">cvlan: 199</text>
+  <text x="300" y="179" text-anchor="middle" font-size="8" fill="#666">client: 11</text>
+  <text x="300" y="191" text-anchor="middle" font-size="8" fill="#666">+ coverage %</text>
+
+  <!-- Stage 4: Integration -->
+  <rect x="365" y="70" width="100" height="50" rx="8" fill="#4A90D9"/>
+  <text x="415" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="white">4. Integ.</text>
+  <text x="415" y="108" text-anchor="middle" font-size="9" fill="#D4E6F9">328 tests</text>
+  <circle cx="415" cy="130" r="8" fill="#4A90D9" stroke="white" stroke-width="2"/>
+
+  <rect x="365" y="150" width="100" height="50" rx="4" fill="#F8F8F8" stroke="#DDD"/>
+  <text x="415" y="167" text-anchor="middle" font-size="8" fill="#333">Real Postgres</text>
+  <text x="415" y="179" text-anchor="middle" font-size="8" fill="#666">Full API tests</text>
+  <text x="415" y="191" text-anchor="middle" font-size="8" fill="#666">+ coverage %</text>
+
+  <!-- Stage 5: Load -->
+  <rect x="480" y="70" width="100" height="50" rx="8" fill="#F0AD4E"/>
+  <text x="530" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="white">5. Load</text>
+  <text x="530" y="108" text-anchor="middle" font-size="9" fill="white">21K ops/s</text>
+  <circle cx="530" cy="130" r="8" fill="#F0AD4E" stroke="white" stroke-width="2"/>
+
+  <rect x="480" y="150" width="100" height="50" rx="4" fill="#F8F8F8" stroke="#DDD"/>
+  <text x="530" y="167" text-anchor="middle" font-size="8" fill="#333">200 concurrency</text>
+  <text x="530" y="179" text-anchor="middle" font-size="8" fill="#666">Throughput ops/s</text>
+  <text x="530" y="191" text-anchor="middle" font-size="8" fill="#666">p99 latency ms</text>
+
+  <!-- Stage 6: E2E -->
+  <rect x="595" y="70" width="100" height="50" rx="8" fill="#E74C3C"/>
+  <text x="645" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="white">6. E2E</text>
+  <text x="645" y="108" text-anchor="middle" font-size="9" fill="white">6 scenarios</text>
+  <circle cx="645" cy="130" r="8" fill="#E74C3C" stroke="white" stroke-width="2"/>
+
+  <rect x="595" y="150" width="100" height="50" rx="4" fill="#F8F8F8" stroke="#DDD"/>
+  <text x="645" y="167" text-anchor="middle" font-size="8" fill="#333">Full stack</text>
+  <text x="645" y="179" text-anchor="middle" font-size="8" fill="#666">Docker compose</text>
+  <text x="645" y="191" text-anchor="middle" font-size="8" fill="#666">curl-based</text>
+
+  <!-- Stage 7: Coverage -->
+  <rect x="710" y="70" width="120" height="50" rx="8" fill="#95A5A6"/>
+  <text x="770" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="white">7. Coverage</text>
+  <text x="770" y="108" text-anchor="middle" font-size="9" fill="white">Aggregate</text>
+  <circle cx="770" cy="130" r="8" fill="#95A5A6" stroke="white" stroke-width="2"/>
+
+  <rect x="710" y="150" width="120" height="50" rx="4" fill="#F8F8F8" stroke="#DDD"/>
+  <text x="770" y="167" text-anchor="middle" font-size="8" fill="#333">Combine stages</text>
+  <text x="770" y="179" text-anchor="middle" font-size="8" fill="#666">3 + 4 coverage</text>
+  <text x="770" y="191" text-anchor="middle" font-size="8" fill="#666">HTML report</text>
+
+  <!-- Vote logic -->
+  <rect x="20" y="220" width="810" height="65" rx="8" fill="#FFF5F5" stroke="#E74C3C" stroke-width="1.5"/>
+  <text x="430" y="240" text-anchor="middle" font-size="12" font-weight="bold" fill="#E74C3C">Vote Logic (REJECT if any)</text>
+  <text x="200" y="260" text-anchor="middle" font-size="10" fill="#333">Any build failure</text>
+  <text x="370" y="260" text-anchor="middle" font-size="10" fill="#333">Any test failure</text>
+  <text x="540" y="260" text-anchor="middle" font-size="10" fill="#333">Lint errors</text>
+  <text x="700" y="260" text-anchor="middle" font-size="10" fill="#333">Coverage drop &gt;2%</text>
+  <text x="300" y="278" text-anchor="middle" font-size="10" fill="#333">Ops/s drop &gt;10%</text>
+  <text x="530" y="278" text-anchor="middle" font-size="10" fill="#333">p99 latency rise &gt;20%</text>
+
+  <!-- Output -->
+  <rect x="20" y="300" width="810" height="65" rx="8" fill="#F0FAF0" stroke="#5CB85C" stroke-width="1.5"/>
+  <text x="430" y="320" text-anchor="middle" font-size="12" font-weight="bold" fill="#5CB85C">Output Artifacts</text>
+  <text x="150" y="340" text-anchor="middle" font-size="10" fill="#333">latest.json + latest.html</text>
+  <text x="370" y="340" text-anchor="middle" font-size="10" fill="#333">baseline.json (last accepted)</text>
+  <text x="600" y="340" text-anchor="middle" font-size="10" fill="#333">runs/&lt;repo&gt;-&lt;sha&gt;.json</text>
+  <text x="430" y="358" text-anchor="middle" font-size="10" fill="#333">Exit code: 0 = ACCEPT | 1 = REJECT</text>
+</svg>

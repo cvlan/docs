@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" font-family="Arial, Helvetica, sans-serif">
+  <text x="430" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Repository Map</text>
+  <text x="430" y="50" text-anchor="middle" font-size="11" fill="#888">5 repos, 8 crates, 7 binaries</text>
+
+  <!-- cvlan repo -->
+  <rect x="30" y="75" width="220" height="190" rx="8" fill="#EBF2FA" stroke="#4A90D9" stroke-width="2"/>
+  <text x="140" y="98" text-anchor="middle" font-size="14" font-weight="bold" fill="#4A90D9">cvlan/</text>
+  <text x="140" y="114" text-anchor="middle" font-size="10" fill="#888">Control plane + CLI</text>
+
+  <rect x="45" y="125" width="90" height="40" rx="5" fill="#4A90D9"/>
+  <text x="90" y="143" text-anchor="middle" font-size="11" font-weight="bold" fill="white">api/</text>
+  <text x="90" y="157" text-anchor="middle" font-size="9" fill="#D4E6F9">cvlan-api</text>
+
+  <rect x="145" y="125" width="90" height="40" rx="5" fill="#4A90D9"/>
+  <text x="190" y="143" text-anchor="middle" font-size="11" font-weight="bold" fill="white">cvlanctl/</text>
+  <text x="190" y="157" text-anchor="middle" font-size="9" fill="#D4E6F9">cvlanctl</text>
+
+  <rect x="45" y="175" width="90" height="35" rx="5" fill="#4A90D9" fill-opacity="0.5"/>
+  <text x="90" y="197" text-anchor="middle" font-size="10" fill="white">protodefs/</text>
+
+  <rect x="145" y="175" width="90" height="35" rx="5" fill="#4A90D9" fill-opacity="0.5"/>
+  <text x="190" y="197" text-anchor="middle" font-size="10" fill="white">tests/</text>
+
+  <rect x="45" y="220" width="190" height="30" rx="4" fill="white" stroke="#4A90D9" stroke-width="1"/>
+  <text x="140" y="240" text-anchor="middle" font-size="9" fill="#4A90D9">Rust + SQLx 0.8 + PostgreSQL/SQLite</text>
+
+  <!-- vrouter repo -->
+  <rect x="270" y="75" width="220" height="190" rx="8" fill="#F0FAF0" stroke="#5CB85C" stroke-width="2"/>
+  <text x="380" y="98" text-anchor="middle" font-size="14" font-weight="bold" fill="#5CB85C">vrouter/</text>
+  <text x="380" y="114" text-anchor="middle" font-size="10" fill="#888">VPP-based virtual router</text>
+
+  <rect x="285" y="125" width="90" height="40" rx="5" fill="#5CB85C"/>
+  <text x="330" y="143" text-anchor="middle" font-size="11" font-weight="bold" fill="white">vrouterd/</text>
+  <text x="330" y="157" text-anchor="middle" font-size="9" fill="#D4F0D4">vrouterd</text>
+
+  <rect x="385" y="125" width="90" height="40" rx="5" fill="#5CB85C"/>
+  <text x="430" y="143" text-anchor="middle" font-size="11" font-weight="bold" fill="white">vrouterctl/</text>
+  <text x="430" y="157" text-anchor="middle" font-size="9" fill="#D4F0D4">vrouterctl</text>
+
+  <rect x="285" y="175" width="90" height="35" rx="5" fill="#5CB85C" fill-opacity="0.5"/>
+  <text x="330" y="197" text-anchor="middle" font-size="10" fill="white">vrouter-gen/</text>
+
+  <rect x="285" y="220" width="190" height="30" rx="4" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <text x="380" y="240" text-anchor="middle" font-size="9" fill="#5CB85C">Rust + VPP 24.10 + rusqlite</text>
+
+  <!-- client repo -->
+  <rect x="510" y="75" width="320" height="190" rx="8" fill="#FDF2E3" stroke="#F0AD4E" stroke-width="2"/>
+  <text x="670" y="98" text-anchor="middle" font-size="14" font-weight="bold" fill="#E09C3E">client/</text>
+  <text x="670" y="114" text-anchor="middle" font-size="10" fill="#888">VPN client (3 crates)</text>
+
+  <rect x="525" y="125" width="90" height="40" rx="5" fill="#F0AD4E"/>
+  <text x="570" y="143" text-anchor="middle" font-size="11" font-weight="bold" fill="white">cvlan-ctrl/</text>
+  <text x="570" y="157" text-anchor="middle" font-size="9" fill="white">cvlan-ctrl</text>
+
+  <rect x="625" y="125" width="90" height="40" rx="5" fill="#F0AD4E"/>
+  <text x="670" y="143" text-anchor="middle" font-size="11" font-weight="bold" fill="white">cvland/</text>
+  <text x="670" y="157" text-anchor="middle" font-size="9" fill="white">cvland</text>
+
+  <rect x="725" y="125" width="90" height="40" rx="5" fill="#F0AD4E"/>
+  <text x="770" y="143" text-anchor="middle" font-size="11" font-weight="bold" fill="white">cvlancli/</text>
+  <text x="770" y="157" text-anchor="middle" font-size="9" fill="white">cvlancli</text>
+
+  <rect x="525" y="175" width="130" height="20" rx="3" fill="#F0AD4E" fill-opacity="0.3"/>
+  <text x="590" y="190" text-anchor="middle" font-size="9" fill="#E09C3E">Control Plane Daemon</text>
+  <rect x="665" y="175" width="75" height="20" rx="3" fill="#F0AD4E" fill-opacity="0.3"/>
+  <text x="702" y="190" text-anchor="middle" font-size="9" fill="#999">Data Plane</text>
+  <rect x="745" y="175" width="75" height="20" rx="3" fill="#F0AD4E" fill-opacity="0.3"/>
+  <text x="782" y="190" text-anchor="middle" font-size="9" fill="#999">Debug</text>
+
+  <rect x="525" y="220" width="290" height="30" rx="4" fill="white" stroke="#F0AD4E" stroke-width="1"/>
+  <text x="670" y="240" text-anchor="middle" font-size="9" fill="#E09C3E">Rust + x25519-dalek + rusqlite + reqwest</text>
+
+  <!-- ui repo -->
+  <rect x="30" y="300" width="220" height="130" rx="8" fill="#E8F6FA" stroke="#5BC0DE" stroke-width="2"/>
+  <text x="140" y="323" text-anchor="middle" font-size="14" font-weight="bold" fill="#46B0CE">ui/</text>
+  <text x="140" y="339" text-anchor="middle" font-size="10" fill="#888">Management frontend</text>
+
+  <rect x="45" y="350" width="190" height="30" rx="5" fill="#5BC0DE"/>
+  <text x="140" y="370" text-anchor="middle" font-size="11" fill="white">React 18 + TypeScript + Vite</text>
+
+  <rect x="45" y="390" width="190" height="25" rx="4" fill="white" stroke="#5BC0DE" stroke-width="1"/>
+  <text x="140" y="407" text-anchor="middle" font-size="9" fill="#46B0CE">Tanstack Query + Zustand + Tailwind</text>
+
+  <!-- e2e repo -->
+  <rect x="270" y="300" width="220" height="130" rx="8" fill="#F5F5F5" stroke="#95A5A6" stroke-width="2"/>
+  <text x="380" y="323" text-anchor="middle" font-size="14" font-weight="bold" fill="#7F8C8D">e2e/</text>
+  <text x="380" y="339" text-anchor="middle" font-size="10" fill="#888">Testing infrastructure</text>
+
+  <rect x="285" y="350" width="90" height="30" rx="5" fill="#95A5A6"/>
+  <text x="330" y="370" text-anchor="middle" font-size="10" fill="white">E2E Tests</text>
+
+  <rect x="385" y="350" width="90" height="30" rx="5" fill="#95A5A6"/>
+  <text x="430" y="370" text-anchor="middle" font-size="10" fill="white">Regression</text>
+
+  <rect x="285" y="390" width="190" height="25" rx="4" fill="white" stroke="#95A5A6" stroke-width="1"/>
+  <text x="380" y="407" text-anchor="middle" font-size="9" fill="#7F8C8D">Docker Compose + shell scripts</text>
+
+  <!-- Shared deps -->
+  <rect x="510" y="300" width="320" height="130" rx="8" fill="#FAFAFA" stroke="#DDD" stroke-width="1.5"/>
+  <text x="670" y="323" text-anchor="middle" font-size="13" font-weight="bold" fill="#666">Shared Infrastructure</text>
+
+  <rect x="525" y="340" width="130" height="25" rx="4" fill="#F0F0F0" stroke="#CCC"/>
+  <text x="590" y="357" text-anchor="middle" font-size="10" fill="#666">protodefs/ (buf)</text>
+
+  <rect x="665" y="340" width="150" height="25" rx="4" fill="#F0F0F0" stroke="#CCC"/>
+  <text x="740" y="357" text-anchor="middle" font-size="10" fill="#666">Docker build containers</text>
+
+  <rect x="525" y="375" width="130" height="25" rx="4" fill="#F0F0F0" stroke="#CCC"/>
+  <text x="590" y="392" text-anchor="middle" font-size="10" fill="#666">step-ca (mTLS CA)</text>
+
+  <rect x="665" y="375" width="150" height="25" rx="4" fill="#F0F0F0" stroke="#CCC"/>
+  <text x="740" y="392" text-anchor="middle" font-size="10" fill="#666">PostgreSQL / SQLite</text>
+
+  <!-- Stats bar -->
+  <rect x="30" y="455" width="800" height="50" rx="8" fill="#F8F8F8" stroke="#E0E0E0"/>
+  <text x="100" y="478" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">100+ commits</text>
+  <line x1="180" y1="462" x2="180" y2="498" stroke="#E0E0E0"/>
+  <text x="260" y="478" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">8 Rust crates</text>
+  <line x1="340" y1="462" x2="340" y2="498" stroke="#E0E0E0"/>
+  <text x="420" y="478" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">7 binaries</text>
+  <line x1="500" y1="462" x2="500" y2="498" stroke="#E0E0E0"/>
+  <text x="590" y="478" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">527+ tests</text>
+  <line x1="660" y1="462" x2="660" y2="498" stroke="#E0E0E0"/>
+  <text x="760" y="478" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">47.5% coverage</text>
+</svg>

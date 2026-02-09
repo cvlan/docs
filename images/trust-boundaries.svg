@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 500" font-family="Arial, Helvetica, sans-serif">
+  <text x="390" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Trust Boundaries</text>
+  <text x="390" y="46" text-anchor="middle" font-size="11" fill="#888">Layered security from untrusted internet to encrypted data plane</text>
+
+  <!-- Layer 0: Internet (outermost) -->
+  <rect x="20" y="65" width="740" height="410" rx="12" fill="#FFF5F5" stroke="#E74C3C" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="40" y="88" font-size="12" font-weight="bold" fill="#E74C3C">UNTRUSTED — Internet</text>
+  <text x="700" y="88" text-anchor="end" font-size="9" fill="#E74C3C">No auth, rate-limited only</text>
+
+  <!-- Layer 1: Discovery -->
+  <rect x="50" y="100" width="680" height="355" rx="10" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="2"/>
+  <text x="70" y="123" font-size="12" font-weight="bold" fill="#E09C3E">DISCOVERY TIER — Port 443</text>
+  <text x="670" y="123" text-anchor="end" font-size="9" fill="#E09C3E">Public endpoint, 100 req/s</text>
+
+  <rect x="80" y="132" width="200" height="40" rx="6" fill="#F0AD4E"/>
+  <text x="180" y="157" text-anchor="middle" font-size="11" font-weight="bold" fill="white">GET /client/discover</text>
+
+  <!-- Layer 2: Registration -->
+  <rect x="80" y="185" width="620" height="250" rx="10" fill="#EBF2FA" stroke="#4A90D9" stroke-width="2"/>
+  <text x="100" y="208" font-size="12" font-weight="bold" fill="#4A90D9">REGISTRATION TIER — Token-verified</text>
+  <text x="640" y="208" text-anchor="end" font-size="9" fill="#4A90D9">Ed25519 token required, 10 req/s</text>
+
+  <rect x="110" y="217" width="220" height="40" rx="6" fill="#4A90D9"/>
+  <text x="220" y="242" text-anchor="middle" font-size="11" font-weight="bold" fill="white">POST /client/register</text>
+
+  <!-- Layer 3: Session (mTLS) -->
+  <rect x="110" y="270" width="560" height="145" rx="10" fill="#F0FAF0" stroke="#5CB85C" stroke-width="2"/>
+  <text x="130" y="293" font-size="12" font-weight="bold" fill="#5CB85C">SESSION TIER — mTLS required</text>
+  <text x="610" y="293" text-anchor="end" font-size="9" fill="#5CB85C">X.509 client cert, 50 req/s</text>
+
+  <rect x="140" y="302" width="180" height="35" rx="6" fill="#5CB85C"/>
+  <text x="230" y="324" text-anchor="middle" font-size="11" font-weight="bold" fill="white">POST /client/poll</text>
+
+  <rect x="340" y="302" width="180" height="35" rx="6" fill="#5CB85C"/>
+  <text x="430" y="324" text-anchor="middle" font-size="11" font-weight="bold" fill="white">All /api/v1/* (JWT)</text>
+
+  <!-- Layer 4: Data Plane (innermost) -->
+  <rect x="140" y="350" width="500" height="50" rx="8" fill="#333" stroke="#555" stroke-width="1.5"/>
+  <text x="390" y="372" text-anchor="middle" font-size="12" font-weight="bold" fill="white">DATA PLANE — WireGuard encrypted tunnels</text>
+  <text x="390" y="388" text-anchor="middle" font-size="9" fill="#AAA">End-to-end encryption | Private keys never leave nodes | Direct mesh or via relay</text>
+
+  <!-- Key principles -->
+  <rect x="20" y="450" width="740" height="35" rx="6" fill="#F8F8F8" stroke="#E0E0E0"/>
+  <text x="390" y="472" text-anchor="middle" font-size="10" fill="#555">No privileged containers | No host filesystem mounts | Certificate pinning | Separate server modes for each tier (DDoS resilience)</text>
+</svg>

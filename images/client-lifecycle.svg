@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 900" style="font-family: Arial, sans-serif;">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333" />
+    </marker>
+    <marker id="arrowhead-success" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#5CB85C" />
+    </marker>
+    <marker id="arrowhead-error" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#d9534f" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="550" y="35" text-anchor="middle" font-size="26" font-weight="bold" fill="#333">cvlan-ctrl Lifecycle</text>
+
+  <!-- START -->
+  <ellipse cx="550" cy="100" rx="60" ry="40" fill="#95A5A6" stroke="#333" stroke-width="2"/>
+  <text x="550" y="108" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">START</text>
+
+  <!-- Load Config -->
+  <rect x="460" y="170" width="180" height="60" rx="10" fill="#F0AD4E" stroke="#333" stroke-width="2"/>
+  <text x="550" y="205" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Load Config</text>
+  <line x1="550" y1="140" x2="550" y2="170" stroke="#F0AD4E" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Check Certs? (Decision Diamond) -->
+  <path d="M 550 280 L 650 340 L 550 400 L 450 340 Z" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="2"/>
+  <text x="550" y="335" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Check</text>
+  <text x="550" y="353" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Certs?</text>
+  <line x1="550" y1="230" x2="550" y2="280" stroke="#F0AD4E" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- No certs path (left) -->
+  <text x="350" y="345" font-size="13" font-weight="bold" fill="#333">No certs</text>
+  <line x1="450" y1="340" x2="300" y2="340" stroke="#F0AD4E" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Discover -->
+  <rect x="150" y="310" width="150" height="60" rx="10" fill="#F0AD4E" stroke="#333" stroke-width="2"/>
+  <text x="225" y="345" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Discover</text>
+
+  <!-- Register -->
+  <rect x="150" y="410" width="150" height="60" rx="10" fill="#F0AD4E" stroke="#333" stroke-width="2"/>
+  <text x="225" y="445" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Register</text>
+  <line x1="225" y1="370" x2="225" y2="410" stroke="#F0AD4E" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Save Certs -->
+  <rect x="150" y="510" width="150" height="60" rx="10" fill="#F0AD4E" stroke="#333" stroke-width="2"/>
+  <text x="225" y="545" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Save Certs</text>
+  <line x1="225" y1="470" x2="225" y2="510" stroke="#F0AD4E" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Arrow from Save Certs to Poll Loop -->
+  <line x1="300" y1="540" x2="460" y2="540" stroke="#F0AD4E" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Certs exist path (right) -->
+  <text x="720" y="345" font-size="13" font-weight="bold" fill="#333">Certs exist</text>
+  <line x1="650" y1="340" x2="800" y2="340" stroke="#F0AD4E" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Restore State -->
+  <rect x="800" y="310" width="150" height="60" rx="10" fill="#F0AD4E" stroke="#333" stroke-width="2"/>
+  <text x="875" y="345" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Restore State</text>
+
+  <!-- Arrow from Restore State to Poll Loop -->
+  <line x1="800" y1="340" x2="640" y2="540" stroke="#F0AD4E" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Poll Loop (Main State) -->
+  <rect x="460" y="510" width="180" height="60" rx="10" fill="#5CB85C" stroke="#333" stroke-width="3"/>
+  <text x="550" y="545" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">Poll Loop</text>
+
+  <!-- Success path (Update Peers) -->
+  <text x="550" y="630" text-anchor="middle" font-size="12" font-weight="bold" fill="#5CB85C">On success</text>
+  <line x1="550" y1="570" x2="550" y2="660" stroke="#5CB85C" stroke-width="3" marker-end="url(#arrowhead-success)"/>
+
+  <!-- Update Peers -->
+  <rect x="460" y="660" width="180" height="60" rx="10" fill="#5CB85C" stroke="#333" stroke-width="2"/>
+  <text x="550" y="695" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Update Peers</text>
+
+  <!-- Loop back from Update Peers to Poll Loop -->
+  <path d="M 640 690 Q 720 690 720 540 Q 720 390 640 540" fill="none" stroke="#5CB85C" stroke-width="3" marker-end="url(#arrowhead-success)"/>
+  <text x="745" y="545" font-size="12" font-weight="bold" fill="#5CB85C">Continue</text>
+
+  <!-- Error path (Warn + Sleep) -->
+  <text x="330" y="590" text-anchor="middle" font-size="12" font-weight="bold" fill="#d9534f">On error</text>
+  <line x1="460" y1="570" x2="300" y2="660" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowhead-error)"/>
+
+  <!-- Warn + Sleep -->
+  <rect x="210" y="660" width="180" height="60" rx="10" fill="#d9534f" stroke="#333" stroke-width="2"/>
+  <text x="300" y="695" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Warn + Sleep</text>
+
+  <!-- Loop back from Warn + Sleep to Poll Loop -->
+  <path d="M 210 690 Q 120 690 120 540 Q 120 390 460 540" fill="none" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowhead-error)"/>
+  <text x="80" y="545" font-size="12" font-weight="bold" fill="#d9534f">Retry</text>
+
+  <!-- SIGTERM path -->
+  <text x="700" y="480" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">SIGTERM</text>
+  <line x1="640" y1="530" x2="760" y2="480" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Shutdown -->
+  <ellipse cx="850" cy="460" rx="80" ry="40" fill="#95A5A6" stroke="#333" stroke-width="2"/>
+  <text x="850" y="468" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Shutdown</text>
+  <line x1="810" y1="470" x2="850" y2="460" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Legend -->
+  <rect x="100" y="790" width="900" height="90" rx="8" fill="#f5f5f5" stroke="#333" stroke-width="2"/>
+  <text x="550" y="815" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Legend</text>
+
+  <rect x="150" y="830" width="80" height="35" rx="6" fill="#F0AD4E" stroke="#333" stroke-width="1.5"/>
+  <text x="190" y="852" text-anchor="middle" font-size="12" fill="#fff">Main Flow</text>
+
+  <rect x="270" y="830" width="80" height="35" rx="6" fill="#5CB85C" stroke="#333" stroke-width="1.5"/>
+  <text x="310" y="852" text-anchor="middle" font-size="12" fill="#fff">Success</text>
+
+  <rect x="390" y="830" width="80" height="35" rx="6" fill="#d9534f" stroke="#333" stroke-width="1.5"/>
+  <text x="430" y="852" text-anchor="middle" font-size="12" fill="#fff">Error</text>
+
+  <path d="M 520 847 L 590 835 L 660 847 L 590 859 Z" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="590" y="852" text-anchor="middle" font-size="11" fill="#333">Decision</text>
+
+  <ellipse cx="750" cy="847" rx="45" ry="22" fill="#95A5A6" stroke="#333" stroke-width="1.5"/>
+  <text x="750" y="852" text-anchor="middle" font-size="11" fill="#fff">Terminal</text>
+
+  <line x1="830" y1="847" x2="900" y2="847" stroke="#5CB85C" stroke-width="3" marker-end="url(#arrowhead-success)"/>
+  <text x="920" y="852" font-size="11" fill="#333">Loop/Repeat</text>
+</svg>

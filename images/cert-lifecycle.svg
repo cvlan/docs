@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="Arial, Helvetica, sans-serif">
+  <text x="380" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">mTLS Certificate Lifecycle</text>
+  <text x="380" y="46" text-anchor="middle" font-size="11" fill="#888">step-ca issued certificates for node ↔ controller trust</text>
+
+  <!-- Timeline arrow -->
+  <line x1="50" y1="180" x2="720" y2="180" stroke="#CCC" stroke-width="3"/>
+  <polygon points="720,175 735,180 720,185" fill="#CCC"/>
+
+  <!-- Phase 1: Request -->
+  <circle cx="120" cy="180" r="8" fill="#F0AD4E" stroke="#E09C3E" stroke-width="2"/>
+  <line x1="120" y1="172" x2="120" y2="85" stroke="#F0AD4E" stroke-width="1.5"/>
+  <rect x="45" y="60" width="150" height="25" rx="12" fill="#F0AD4E"/>
+  <text x="120" y="77" text-anchor="middle" font-size="11" font-weight="bold" fill="white">1. Registration</text>
+
+  <rect x="35" y="200" width="170" height="70" rx="6" fill="#FDF2E3" stroke="#F0AD4E" stroke-width="1"/>
+  <text x="120" y="218" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Node → Controller</text>
+  <text x="120" y="233" text-anchor="middle" font-size="9" fill="#666">Ed25519 token + WG pubkey</text>
+  <text x="120" y="246" text-anchor="middle" font-size="9" fill="#666">MAC + nonce + hostname</text>
+  <text x="120" y="259" text-anchor="middle" font-size="9" fill="#666">POST /client/register</text>
+
+  <!-- Phase 2: Issue -->
+  <circle cx="290" cy="180" r="8" fill="#4A90D9" stroke="#3A7BC8" stroke-width="2"/>
+  <line x1="290" y1="172" x2="290" y2="85" stroke="#4A90D9" stroke-width="1.5"/>
+  <rect x="225" y="60" width="130" height="25" rx="12" fill="#4A90D9"/>
+  <text x="290" y="77" text-anchor="middle" font-size="11" font-weight="bold" fill="white">2. Issuance</text>
+
+  <rect x="215" y="200" width="150" height="70" rx="6" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1"/>
+  <text x="290" y="218" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Controller → step-ca</text>
+  <text x="290" y="233" text-anchor="middle" font-size="9" fill="#666">CSR with node identity</text>
+  <text x="290" y="246" text-anchor="middle" font-size="9" fill="#666">step-ca signs X.509 cert</text>
+  <text x="290" y="259" text-anchor="middle" font-size="9" fill="#666">Returns cert + key + CA</text>
+
+  <!-- Phase 3: Active -->
+  <circle cx="450" cy="180" r="8" fill="#5CB85C" stroke="#4CAE4C" stroke-width="2"/>
+  <line x1="450" y1="172" x2="450" y2="85" stroke="#5CB85C" stroke-width="1.5"/>
+  <rect x="385" y="60" width="130" height="25" rx="12" fill="#5CB85C"/>
+  <text x="450" y="77" text-anchor="middle" font-size="11" font-weight="bold" fill="white">3. Active Use</text>
+
+  <rect x="375" y="200" width="150" height="70" rx="6" fill="#F0FAF0" stroke="#5CB85C" stroke-width="1"/>
+  <text x="450" y="218" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Node → Controller</text>
+  <text x="450" y="233" text-anchor="middle" font-size="9" fill="#666">mTLS poll requests</text>
+  <text x="450" y="246" text-anchor="middle" font-size="9" fill="#666">Cert proves identity</text>
+  <text x="450" y="259" text-anchor="middle" font-size="9" fill="#666">Session mode endpoints</text>
+
+  <!-- Phase 4: Expiry -->
+  <circle cx="620" cy="180" r="8" fill="#E74C3C" stroke="#C0392B" stroke-width="2"/>
+  <line x1="620" y1="172" x2="620" y2="85" stroke="#E74C3C" stroke-width="1.5"/>
+  <rect x="555" y="60" width="130" height="25" rx="12" fill="#E74C3C"/>
+  <text x="620" y="77" text-anchor="middle" font-size="11" font-weight="bold" fill="white">4. Expiry</text>
+
+  <rect x="545" y="200" width="150" height="70" rx="6" fill="#FFF5F5" stroke="#E74C3C" stroke-width="1"/>
+  <text x="620" y="218" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Certificate Expires</text>
+  <text x="620" y="233" text-anchor="middle" font-size="9" fill="#666">VRouter: 8 hours</text>
+  <text x="620" y="246" text-anchor="middle" font-size="9" fill="#666">Client: 1 year</text>
+  <text x="620" y="259" text-anchor="middle" font-size="9" fill="#666">Must re-register</text>
+
+  <!-- Renewal arrow (loop back) -->
+  <path d="M620,275 C620,330 120,330 120,275" fill="none" stroke="#F0AD4E" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#al-o)"/>
+  <text x="370" y="340" text-anchor="middle" font-size="10" fill="#E09C3E">Re-register on expiry (new token or cached credentials)</text>
+
+  <!-- Key properties -->
+  <rect x="30" y="360" width="700" height="30" rx="4" fill="#F8F8F8" stroke="#E0E0E0"/>
+  <text x="380" y="380" text-anchor="middle" font-size="10" fill="#555">Private keys never leave the node | CA chain stored locally | Cert pinning on controller | SHA256(mac+nonce) binding</text>
+
+  <defs>
+    <marker id="al-o" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#F0AD4E"/></marker>
+  </defs>
+</svg>

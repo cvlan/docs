@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 440" font-family="Arial, Helvetica, sans-serif">
+  <text x="390" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">SQLite State Databases</text>
+  <text x="390" y="46" text-anchor="middle" font-size="11" fill="#888">Local state on data plane nodes — WAL mode, tiny footprint</text>
+
+  <!-- VRouter state.db -->
+  <rect x="20" y="70" width="360" height="310" rx="8" fill="#F0FAF0" stroke="#5CB85C" stroke-width="2"/>
+  <text x="200" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#5CB85C">vrouterd state.db</text>
+  <text x="200" y="112" text-anchor="middle" font-size="10" fill="#888">/var/lib/vrouter/state.db</text>
+
+  <!-- Table: controller_state -->
+  <rect x="35" y="125" width="330" height="60" rx="4" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <rect x="35" y="125" width="330" height="22" rx="4" fill="#5CB85C"/>
+  <text x="200" y="141" text-anchor="middle" font-size="11" font-weight="bold" fill="white">controller_state</text>
+  <text x="45" y="161" font-size="9" fill="#333">key TEXT PK | value BLOB</text>
+  <text x="45" y="174" font-size="9" fill="#666">Keys: node_id, assigned_ip, wg_pubkey, controller_url, registered_at</text>
+
+  <!-- Table: interfaces -->
+  <rect x="35" y="195" width="330" height="60" rx="4" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <rect x="35" y="195" width="330" height="22" rx="4" fill="#5CB85C"/>
+  <text x="200" y="211" text-anchor="middle" font-size="11" font-weight="bold" fill="white">interfaces</text>
+  <text x="45" y="231" font-size="9" fill="#333">name TEXT PK | vpp_sw_if_index INT | type TEXT</text>
+  <text x="45" y="244" font-size="9" fill="#666">wg_pubkey BLOB | endpoint TEXT | assigned_ip TEXT</text>
+
+  <!-- Table: routes -->
+  <rect x="35" y="265" width="330" height="50" rx="4" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <rect x="35" y="265" width="330" height="22" rx="4" fill="#5CB85C"/>
+  <text x="200" y="281" text-anchor="middle" font-size="11" font-weight="bold" fill="white">routes</text>
+  <text x="45" y="301" font-size="9" fill="#333">prefix TEXT PK | next_hop TEXT | vrf INT | interface TEXT</text>
+
+  <!-- Table: sync_state -->
+  <rect x="35" y="325" width="330" height="45" rx="4" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <rect x="35" y="325" width="330" height="22" rx="4" fill="#5CB85C"/>
+  <text x="200" y="341" text-anchor="middle" font-size="11" font-weight="bold" fill="white">sync_state</text>
+  <text x="45" y="361" font-size="9" fill="#333">key TEXT PK | value TEXT — last_seen_version, last_poll_at</text>
+
+  <!-- Client state.db -->
+  <rect x="400" y="70" width="360" height="310" rx="8" fill="#FDF2E3" stroke="#F0AD4E" stroke-width="2"/>
+  <text x="580" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#E09C3E">cvlan-ctrl state.db</text>
+  <text x="580" y="112" text-anchor="middle" font-size="10" fill="#888">/var/lib/cvland/state.db</text>
+
+  <!-- Table: controller_state -->
+  <rect x="415" y="125" width="330" height="60" rx="4" fill="white" stroke="#F0AD4E" stroke-width="1"/>
+  <rect x="415" y="125" width="330" height="22" rx="4" fill="#F0AD4E"/>
+  <text x="580" y="141" text-anchor="middle" font-size="11" font-weight="bold" fill="white">controller_state</text>
+  <text x="425" y="161" font-size="9" fill="#333">key TEXT PK | value BLOB</text>
+  <text x="425" y="174" font-size="9" fill="#666">Keys: node_id, assigned_ip, assigned_ip6, cvlan_id, tenant_id</text>
+
+  <!-- Table: peers -->
+  <rect x="415" y="195" width="330" height="75" rx="4" fill="white" stroke="#F0AD4E" stroke-width="1"/>
+  <rect x="415" y="195" width="330" height="22" rx="4" fill="#F0AD4E"/>
+  <text x="580" y="211" text-anchor="middle" font-size="11" font-weight="bold" fill="white">peers</text>
+  <text x="425" y="231" font-size="9" fill="#333">node_id BLOB PK (16 bytes) | name TEXT</text>
+  <text x="425" y="244" font-size="9" fill="#333">wg_pubkey BLOB (32 bytes) | assigned_ip TEXT</text>
+  <text x="425" y="257" font-size="9" fill="#666">endpoints TEXT (JSON) | derp_region INT | online INT | updated_at INT</text>
+
+  <!-- Table: sync_state -->
+  <rect x="415" y="280" width="330" height="45" rx="4" fill="white" stroke="#F0AD4E" stroke-width="1"/>
+  <rect x="415" y="280" width="330" height="22" rx="4" fill="#F0AD4E"/>
+  <text x="580" y="296" text-anchor="middle" font-size="11" font-weight="bold" fill="white">sync_state</text>
+  <text x="425" y="316" font-size="9" fill="#333">key TEXT PK | value TEXT — last_seen_version, last_poll_at</text>
+
+  <!-- Key difference callout -->
+  <rect x="415" y="340" width="330" height="30" rx="4" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1"/>
+  <text x="580" y="360" text-anchor="middle" font-size="9" fill="#E09C3E">Simpler: no VRF, no routes, no VPP indices — just peers</text>
+
+  <!-- Footer -->
+  <rect x="20" y="395" width="740" height="35" rx="6" fill="#F8F8F8" stroke="#E0E0E0"/>
+  <text x="390" y="417" text-anchor="middle" font-size="10" fill="#555">PRAGMA journal_mode=WAL | PRAGMA synchronous=NORMAL | rusqlite (bundled SQLite) | Zero system dependencies</text>
+</svg>

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" font-family="Arial, Helvetica, sans-serif">
+  <text x="400" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Authentication Decision Tree</text>
+  <text x="400" y="46" text-anchor="middle" font-size="11" fill="#888">Four mechanisms, each for a specific caller type</text>
+
+  <!-- Incoming request -->
+  <rect x="300" y="65" width="200" height="36" rx="18" fill="#333"/>
+  <text x="400" y="88" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Incoming Request</text>
+
+  <line x1="400" y1="101" x2="400" y2="130" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Decision: Who is the caller? -->
+  <polygon points="400,130 530,170 400,210 270,170" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="400" y="167" text-anchor="middle" font-size="11" fill="#333">Who is the</text>
+  <text x="400" y="180" text-anchor="middle" font-size="11" fill="#333">caller?</text>
+
+  <!-- Branch 1: New Node (far left) -->
+  <line x1="300" y1="155" x2="100" y2="155" stroke="#F0AD4E" stroke-width="1.5"/>
+  <line x1="100" y1="155" x2="100" y2="245" stroke="#F0AD4E" stroke-width="1.5" marker-end="url(#a-o)"/>
+  <text x="200" y="148" text-anchor="middle" font-size="10" fill="#E09C3E">New node</text>
+
+  <rect x="20" y="245" width="160" height="90" rx="8" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1.5"/>
+  <text x="100" y="268" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Ed25519 Token</text>
+  <rect x="35" y="278" width="130" height="18" rx="3" fill="white" fill-opacity="0.25"/>
+  <text x="100" y="291" text-anchor="middle" font-size="9" fill="white">POST /client/register</text>
+  <rect x="35" y="300" width="130" height="18" rx="3" fill="white" fill-opacity="0.25"/>
+  <text x="100" y="313" text-anchor="middle" font-size="9" fill="white">10 req/s rate limit</text>
+
+  <!-- Details -->
+  <rect x="20" y="345" width="160" height="65" rx="4" fill="#FDF2E3" stroke="#F0AD4E" stroke-width="1"/>
+  <text x="100" y="362" text-anchor="middle" font-size="9" fill="#333">Tenant signs token offline</text>
+  <text x="100" y="375" text-anchor="middle" font-size="9" fill="#333">Contains CVLAN assignment</text>
+  <text x="100" y="388" text-anchor="middle" font-size="9" fill="#333">Node sends + WG pubkey</text>
+  <text x="100" y="401" text-anchor="middle" font-size="9" fill="#333">Server verifies + issues cert</text>
+
+  <!-- Branch 2: Registered Node -->
+  <line x1="335" y1="195" x2="290" y2="245" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#a-g)"/>
+  <text x="285" y="218" font-size="10" fill="#5CB85C">Registered node</text>
+
+  <rect x="210" y="245" width="160" height="90" rx="8" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1.5"/>
+  <text x="290" y="268" text-anchor="middle" font-size="13" font-weight="bold" fill="white">mTLS Certificate</text>
+  <rect x="225" y="278" width="130" height="18" rx="3" fill="white" fill-opacity="0.25"/>
+  <text x="290" y="291" text-anchor="middle" font-size="9" fill="white">POST /client/poll</text>
+  <rect x="225" y="300" width="130" height="18" rx="3" fill="white" fill-opacity="0.25"/>
+  <text x="290" y="313" text-anchor="middle" font-size="9" fill="white">50 req/s rate limit</text>
+
+  <rect x="210" y="345" width="160" height="65" rx="4" fill="#F0FAF0" stroke="#5CB85C" stroke-width="1"/>
+  <text x="290" y="362" text-anchor="middle" font-size="9" fill="#333">X.509 client cert</text>
+  <text x="290" y="375" text-anchor="middle" font-size="9" fill="#333">Issued by step-ca</text>
+  <text x="290" y="388" text-anchor="middle" font-size="9" fill="#333">8hr validity (vrouter)</text>
+  <text x="290" y="401" text-anchor="middle" font-size="9" fill="#333">1yr validity (client)</text>
+
+  <!-- Branch 3: Human User -->
+  <line x1="465" y1="195" x2="510" y2="245" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#a-bl)"/>
+  <text x="510" y="218" font-size="10" fill="#4A90D9">Human / UI</text>
+
+  <rect x="430" y="245" width="160" height="90" rx="8" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1.5"/>
+  <text x="510" y="268" text-anchor="middle" font-size="13" font-weight="bold" fill="white">JWT Bearer</text>
+  <rect x="445" y="278" width="130" height="18" rx="3" fill="white" fill-opacity="0.25"/>
+  <text x="510" y="291" text-anchor="middle" font-size="9" fill="white">All /api/v1/* routes</text>
+  <rect x="445" y="300" width="130" height="18" rx="3" fill="white" fill-opacity="0.25"/>
+  <text x="510" y="313" text-anchor="middle" font-size="9" fill="white">HS256 signed</text>
+
+  <rect x="430" y="345" width="160" height="65" rx="4" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1"/>
+  <text x="510" y="362" text-anchor="middle" font-size="9" fill="#333">Claims: sub, role, scopes</text>
+  <text x="510" y="375" text-anchor="middle" font-size="9" fill="#333">Roles: superadmin, tenant-</text>
+  <text x="510" y="388" text-anchor="middle" font-size="9" fill="#333">admin, member, readonly</text>
+  <text x="510" y="401" text-anchor="middle" font-size="9" fill="#333">Issuer: "cvlan" (exact)</text>
+
+  <!-- Branch 4: CLI / Automation -->
+  <line x1="500" y1="155" x2="680" y2="155" stroke="#95A5A6" stroke-width="1.5"/>
+  <line x1="680" y1="155" x2="680" y2="245" stroke="#95A5A6" stroke-width="1.5" marker-end="url(#a-gr)"/>
+  <text x="590" y="148" text-anchor="middle" font-size="10" fill="#7F8C8D">CLI / automation</text>
+
+  <rect x="600" y="245" width="160" height="90" rx="8" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5"/>
+  <text x="680" y="268" text-anchor="middle" font-size="13" font-weight="bold" fill="white">API Key</text>
+  <rect x="615" y="278" width="130" height="18" rx="3" fill="white" fill-opacity="0.25"/>
+  <text x="680" y="291" text-anchor="middle" font-size="9" fill="white">All /api/v1/* routes</text>
+  <rect x="615" y="300" width="130" height="18" rx="3" fill="white" fill-opacity="0.25"/>
+  <text x="680" y="313" text-anchor="middle" font-size="9" fill="white">--api-key flag</text>
+
+  <rect x="600" y="345" width="160" height="65" rx="4" fill="#F5F5F5" stroke="#95A5A6" stroke-width="1"/>
+  <text x="680" y="362" text-anchor="middle" font-size="9" fill="#333">Argon2 hashed in DB</text>
+  <text x="680" y="375" text-anchor="middle" font-size="9" fill="#333">Scoped permissions</text>
+  <text x="680" y="388" text-anchor="middle" font-size="9" fill="#333">cvlanctl --api-key &lt;key&gt;</text>
+  <text x="680" y="401" text-anchor="middle" font-size="9" fill="#333">Tenant-scoped access</text>
+
+  <!-- Discovery (public) note -->
+  <rect x="30" y="430" width="160" height="45" rx="6" fill="#F8F8F8" stroke="#DDD" stroke-width="1.5"/>
+  <text x="110" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#666">No Auth</text>
+  <text x="110" y="465" text-anchor="middle" font-size="9" fill="#999">GET /client/discover</text>
+
+  <!-- Rate limit note -->
+  <rect x="210" y="430" width="550" height="45" rx="6" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1"/>
+  <text x="485" y="448" text-anchor="middle" font-size="10" fill="#333">Rate Limits (per-IP): discover 100/s | register 10/s | poll 50/s | API varies by endpoint</text>
+  <text x="485" y="463" text-anchor="middle" font-size="10" fill="#333">Burst multiplier: 5x | Server modes: discovery (443) / registration / session (mTLS)</text>
+
+  <!-- Legend bottom -->
+  <line x1="30" y1="495" x2="770" y2="495" stroke="#EEE" stroke-width="1"/>
+  <rect x="50" y="510" width="14" height="14" rx="3" fill="#F0AD4E"/>
+  <text x="70" y="522" font-size="10" fill="#555">New nodes</text>
+  <rect x="160" y="510" width="14" height="14" rx="3" fill="#5CB85C"/>
+  <text x="180" y="522" font-size="10" fill="#555">Registered nodes</text>
+  <rect x="300" y="510" width="14" height="14" rx="3" fill="#4A90D9"/>
+  <text x="320" y="522" font-size="10" fill="#555">Human users / UI</text>
+  <rect x="440" y="510" width="14" height="14" rx="3" fill="#95A5A6"/>
+  <text x="460" y="522" font-size="10" fill="#555">CLI / automation</text>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#555"/></marker>
+    <marker id="a-o" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#F0AD4E"/></marker>
+    <marker id="a-g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#5CB85C"/></marker>
+    <marker id="a-bl" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4A90D9"/></marker>
+    <marker id="a-gr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#95A5A6"/></marker>
+  </defs>
+</svg>

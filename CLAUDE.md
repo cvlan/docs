@@ -30,6 +30,11 @@ It targets enterprises that need secure, compliant network connectivity but are 
 | **Dual protocol: WireGuard + IKEv2/IPsec** | WireGuard for simplicity, IPsec for compliance |
 | **Cloud-neutral infrastructure** | No AWS/GCP-specific services, runs anywhere |
 | **Self-hosted is primary, not secondary** | Unlike Tailscale/Headscale relationship |
+| **Server-authoritative model** | Server assigns CVLANs, IPs, policies. Clients don't choose. |
+| **Ed25519 registration tokens** | Tenant signs offline, server verifies and assigns CVLAN |
+| **mTLS via step-ca** | Lightweight CA, auto-renewal, no manual cert management |
+| **Protocol Buffers for types** | Single source of truth, generates Rust + TypeScript |
+| **SQLite dual-backend** | Self-hosted single-box deploys without Postgres dependency |
 
 ### Business
 | Decision | Rationale |
@@ -39,73 +44,57 @@ It targets enterprises that need secure, compliant network connectivity but are 
 | **No VC model** | Build solid product, fair pricing, no ARR pressure |
 | **Target: large enterprises** | Struggling with SD-WAN costs, compliance needs |
 
-## USPs / Differentiators
-
-1. **Dual protocol**: WireGuard + IPsec (compliance-ready, not WireGuard-only)
-2. **First-class self-hosting**: Same product for SaaS and self-hosted
-3. **Air-gapped support**: Fully offline operation possible
-4. **Cloud vRouters**: Managed IPsec concentrators for tenants
-5. **Radically lower cost**: 10-50x cheaper than traditional SD-WAN
-6. **No VC extraction**: Sustainable pricing, focused product
-
-## Constraints
-
-| Constraint | Target |
-|------------|--------|
-| Scale | 100k clients |
-| Infrastructure cost at scale | < $2,000/month |
-| Break-even point | Few hundred nodes |
-| Deployment | Any cloud, colo, or on-prem |
-| Memory model | No GC languages for data plane |
-
 ## Component Naming
 
-| Component | Binary/Reference |
-|-----------|------------------|
-| Control plane | cvlan-controller |
-| Client agent | cvlan-agent |
-| Relay server | cvlan-relay |
-| vRouter | cvlan-vrouter |
-| CLI tool | cvlanctl |
-| Policy engine | cvlan-policy |
+| Component | Binary | Repo | Description |
+|-----------|--------|------|-------------|
+| Control plane API | cvlan-api | cvlan/ | REST API + node registration + policy |
+| Admin CLI | cvlanctl | cvlan/ | Tenant/CVLAN/node management |
+| VPP Gateway | vrouterd | vrouter/ | VPP 24.10 + WireGuard + IPsec |
+| Gateway CLI | vrouterctl | vrouter/ | VPP debug/introspection |
+| Client control plane | cvlan-ctrl | client/ | Discovery, registration, poll loop |
+| Client data plane | cvland | client/ | WireGuard tunnels (stub) |
+| Client CLI | cvlancli | client/ | Debug/introspection |
+| Management UI | — | ui/ | React 18 + TypeScript |
+| Relay | — | — | Not started |
 
 ## Architecture Summary
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    cvlan-controller                          │
-│         (coordination, auth, policy, node mgmt)              │
-└─────────────────────┬───────────────────────────────────────┘
-                      │ Control Plane (HTTPS/Noise)
-        ┌─────────────┼─────────────┬─────────────┐
-        ▼             ▼             ▼             ▼
-   ┌─────────┐  ┌─────────┐  ┌──────────┐  ┌──────────┐
-   │cvlan-   │  │cvlan-   │  │cvlan-    │  │cvlan-    │
-   │agent    │  │agent    │  │vrouter   │  │relay     │
-   │(WG+IPsec)│ │(WG+IPsec)│ │(IPsec GW)│  │(fallback)│
-   └────┬────┘  └────┬────┘  └────┬─────┘  └────┬─────┘
-        │            │            │             │
-        └────────────┴─────┬──────┴─────────────┘
-                           │ Data Plane (WireGuard / IPsec)
-                      Direct mesh or via relay
+CONTROL PLANE
+┌─────────────────────────────────────────────────────────────────┐
+│  cvlan-api (REST + node registration + policy + audit)          │
+│  Multi-tenant RBAC │ Background scheduler │ IP allocation       │
+│  Server modes: controller / discovery / registration / session  │
+└──────────────────────────┬──────────────────────────────────────┘
+                           │ HTTPS / mTLS
+DATA PLANE                 │
+┌──────────────────────────┴──────────────────────────────────────┐
+│  vrouterd         cvlan-ctrl+cvland   relay (not started)       │
+│  (VPP gateway)    (client node)       (NAT traversal)           │
+│  [vrouter repo]   [client repo]                                 │
+└─────────────────────────────────────────────────────────────────┘
+        │               │               │
+        └───────────────┴───────────────┘
+              Direct mesh (WireGuard) or via relay
 ```
 
 ## Current Phase
 
-> Update this section as work progresses
+**Phase**: Client data plane (critical path to first connection)
+**What's built**: Control plane API, VPP gateway, management UI, client control plane daemon, regression suite
+**What's next**: cvland (boringtun WireGuard tunnels), node-VRouter connectivity, end-to-end test
+**Status**: See [STATUS.md](STATUS.md)
 
-**Phase**: Planning / Documentation
-**Focus**: Establishing project structure and technical specifications
-**Next**: Begin implementation with relay server (small, self-contained, proves the stack)
+## Implementation Path (Actual)
 
-## Implementation Order (Suggested)
-
-1. **cvlan-relay** - Rust relay server, proves the stack
-2. **cvlan-controller** - Basic control plane, node registration
-3. **cvlan-agent** - WireGuard client agent
-4. **cvlan-policy** - ACL engine
-5. **IPsec integration** - Add IKEv2 support
-6. **cvlan-vrouter** - Managed IPsec concentrator
+1. **cvlan-api** — Control plane with multi-tenancy, RBAC, audit logging (Week 1)
+2. **Management UI** — React SPA for all entity management (Week 1-2)
+3. **vrouterd** — VPP gateway with mTLS registration + DiffSync poll (Week 3)
+4. **Protocol Buffers** — Single source of truth for type definitions (Week 3)
+5. **cvlan-ctrl** — Client control plane daemon (Week 4)
+6. **cvland** — Client data plane with boringtun (next)
+7. **Relay** — NAT traversal (future)
 
 ## Code Conventions
 
@@ -113,33 +102,28 @@ It targets enterprises that need secure, compliant network connectivity but are 
 - **Async runtime**: Tokio
 - **Error handling**: `thiserror` for libraries, `anyhow` for binaries
 - **CLI parsing**: `clap`
-- **Serialization**: `serde` with JSON for configs, binary protocols for wire
+- **Serialization**: `serde` with JSON for configs, YAML for config files
+- **Database**: SQLx 0.8 (Postgres), rusqlite (bundled SQLite for local state)
+- **Crypto**: x25519-dalek (Curve25519), Ed25519 (signing), Argon2 (password/key hashing)
 - **No unsafe** unless absolutely necessary and well-documented
-
-## Out of Scope
-
-- User documentation (separate repo if needed)
-- Mobile clients (future phase)
-- GUI clients (CLI-first)
-- Kubernetes operators (future phase)
-- Terraform providers (future phase)
+- **All builds in Docker** — never cargo/npm on host
 
 ## Session Instructions for Claude
 
 1. **Read this file first** in any new session
-2. **Check WORK_TRACKING.md** for current status and open items
+2. **Check [STATUS.md](STATUS.md)** for current status and open items
 3. **Do not add Claude as co-author** in git commits
-4. **Respect settled decisions** listed above—don't re-debate them
-5. **Keep code simple**—no over-engineering, no premature abstraction
-6. **Update WORK_TRACKING.md** when completing significant items
-7. **Update JOURNAL.md** with interesting learnings or challenges
+4. **Respect settled decisions** listed above — don't re-debate them
+5. **Keep code simple** — no over-engineering, no premature abstraction
+6. **All builds happen in Docker containers** — never run cargo/npm on host
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `CLAUDE.md` | This file - project context |
-| `WORK_TRACKING.md` | Current progress, backlog, decisions log |
-| `JOURNAL.md` | Notes for eventual blog post |
-| `technical/architecture.md` | Detailed system design |
-| `technical/technology-choices.md` | Why Rust, why no GC, key deps |
+| `CLAUDE.md` | This file — project context |
+| `STATUS.md` | Current progress, backlog, Headscale comparison |
+| `README.md` | Landing page + component table + doc links |
+| `architecture/` | System design documents |
+| `technical/` | Deep dives (IP allocation, auth, database, etc.) |
+| `operations/` | Build system, testing, deployment |

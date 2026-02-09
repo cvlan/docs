@@ -1,0 +1,54 @@
+<svg viewBox="0 0 900 650" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333" text-anchor="middle">Tiered Server Architecture</text>
+  <text x="450" y="55" font-family="Arial, sans-serif" font-size="14" fill="#666" text-anchor="middle">DDoS Resilience Through Service Isolation</text>
+
+  <!-- Internet cloud -->
+  <ellipse cx="100" cy="300" rx="60" ry="40" fill="#E8F4F8" stroke="#4A90D9" stroke-width="2"/>
+  <text x="100" y="295" font-family="Arial, sans-serif" font-size="12" fill="#4A90D9" text-anchor="middle" font-weight="bold">Internet</text>
+  <text x="100" y="310" font-family="Arial, sans-serif" font-size="10" fill="#4A90D9" text-anchor="middle">Clients</text>
+
+  <!-- Tier 1: Discovery -->
+  <rect x="250" y="100" width="550" height="120" fill="#5BC0DE" stroke="#333" stroke-width="2" rx="8"/>
+  <text x="525" y="130" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Tier 1: Discovery</text>
+  <text x="525" y="155" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">Port 443 (HTTPS) • Public • Stateless • CDN-cacheable</text>
+  <text x="525" y="180" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">GET /client/discover?tenant=acme → Returns controller URL</text>
+  <text x="525" y="200" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">No authentication required • Can be fronted by CDN/WAF</text>
+
+  <!-- Tier 2: Registration -->
+  <rect x="250" y="270" width="550" height="120" fill="#F0AD4E" stroke="#333" stroke-width="2" rx="8"/>
+  <text x="525" y="300" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Tier 2: Registration</text>
+  <text x="525" y="325" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">Public (HTTPS) • Rate-limited • Token authentication</text>
+  <text x="525" y="350" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">POST /client/register → Issues X.509 certificate + node credentials</text>
+  <text x="525" y="370" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">Single-use tokens • IP-based rate limiting • Can scale horizontally</text>
+
+  <!-- Tier 3: Session -->
+  <rect x="250" y="440" width="550" height="120" fill="#5CB85C" stroke="#333" stroke-width="2" rx="8"/>
+  <text x="525" y="470" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Tier 3: Session (Long-lived Connections)</text>
+  <text x="525" y="495" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">mTLS-only • Internal • Persistent connections</text>
+  <text x="525" y="520" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">POST /client/poll → Streaming policy updates (100k+ connections)</text>
+  <text x="525" y="540" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">Certificate authentication required • Not exposed to public internet</text>
+
+  <!-- Arrow: Internet to Tier 1 -->
+  <line x1="160" y1="300" x2="250" y2="160" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="190" y="220" font-family="Arial, sans-serif" font-size="12" fill="#333" font-weight="bold">Public</text>
+
+  <!-- Arrow: Tier 1 to Tier 2 -->
+  <line x1="525" y1="220" x2="525" y2="270" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="560" y="250" font-family="Arial, sans-serif" font-size="11" fill="#333">Returns URL</text>
+
+  <!-- Arrow: Tier 2 to Tier 3 -->
+  <line x1="525" y1="390" x2="525" y2="440" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="560" y="420" font-family="Arial, sans-serif" font-size="11" fill="#333">Issues cert</text>
+
+  <!-- Note box -->
+  <rect x="50" y="590" width="800" height="45" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="2" rx="5"/>
+  <text x="450" y="610" font-family="Arial, sans-serif" font-size="13" fill="#333" text-anchor="middle" font-weight="bold">Security Benefit</text>
+  <text x="450" y="628" font-family="Arial, sans-serif" font-size="12" fill="#333" text-anchor="middle">Attackers can DDoS the front door (Tier 1/2) but cannot disrupt established sessions (Tier 3)</text>
+</svg>

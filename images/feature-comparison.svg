@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 580" font-family="Arial, Helvetica, sans-serif">
+  <text x="350" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">CloudVLAN vs Headscale</text>
+  <text x="350" y="46" text-anchor="middle" font-size="11" fill="#888">Honest comparison as of Feb 2026</text>
+
+  <!-- Header row -->
+  <rect x="20" y="62" width="240" height="32" rx="4" fill="#F0F0F0"/>
+  <text x="140" y="83" text-anchor="middle" font-size="12" font-weight="bold" fill="#555">Category</text>
+  <rect x="270" y="62" width="200" height="32" rx="4" fill="#4A90D9"/>
+  <text x="370" y="83" text-anchor="middle" font-size="12" font-weight="bold" fill="white">CloudVLAN</text>
+  <rect x="480" y="62" width="200" height="32" rx="4" fill="#7F8C8D"/>
+  <text x="580" y="83" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Headscale</text>
+
+  <!-- Row helper: y starts at 100, each row is 34px -->
+  <!-- Row 1: Node Client -->
+  <rect x="20" y="100" width="240" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="121" font-size="11" fill="#333">Node Client</text>
+  <rect x="270" y="100" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="280" y="108" width="60" height="18" rx="9" fill="#E74C3C"/>
+  <text x="310" y="121" text-anchor="middle" font-size="9" font-weight="bold" fill="white">NOT YET</text>
+  <rect x="480" y="100" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="490" y="108" width="80" height="18" rx="9" fill="#5CB85C"/>
+  <text x="530" y="121" text-anchor="middle" font-size="9" font-weight="bold" fill="white">MATURE</text>
+
+  <!-- Row 2: Multi-tenancy -->
+  <rect x="20" y="134" width="240" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="155" font-size="11" fill="#333">Multi-tenancy</text>
+  <rect x="270" y="134" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="280" y="142" width="40" height="18" rx="9" fill="#5CB85C"/>
+  <text x="300" y="155" text-anchor="middle" font-size="9" font-weight="bold" fill="white">FULL</text>
+  <text x="330" y="155" font-size="9" fill="#666">Isolation + RBAC</text>
+  <rect x="480" y="134" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="490" y="142" width="45" height="18" rx="9" fill="#E74C3C"/>
+  <text x="512" y="155" text-anchor="middle" font-size="9" font-weight="bold" fill="white">NONE</text>
+
+  <!-- Row 3: Policy / ACL -->
+  <rect x="20" y="168" width="240" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="189" font-size="11" fill="#333">Policy / ACL</text>
+  <rect x="270" y="168" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <text x="280" y="189" font-size="9" fill="#666">API-driven CRUD</text>
+  <rect x="480" y="168" width="200" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="490" y="189" font-size="9" fill="#666">Static HuJSON files</text>
+
+  <!-- Row 4: Audit Logging -->
+  <rect x="20" y="202" width="240" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="223" font-size="11" fill="#333">Audit Logging</text>
+  <rect x="270" y="202" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <text x="280" y="223" font-size="9" fill="#666">90-day retention + export</text>
+  <rect x="480" y="202" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="490" y="210" width="45" height="18" rx="9" fill="#E74C3C"/>
+  <text x="512" y="223" text-anchor="middle" font-size="9" font-weight="bold" fill="white">NONE</text>
+
+  <!-- Row 5: Managed Gateways -->
+  <rect x="20" y="236" width="240" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="257" font-size="11" fill="#333">Managed Gateways</text>
+  <rect x="270" y="236" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <text x="280" y="257" font-size="9" fill="#666">VPP vrouters + DiffSync</text>
+  <rect x="480" y="236" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="490" y="244" width="45" height="18" rx="9" fill="#E74C3C"/>
+  <text x="512" y="257" text-anchor="middle" font-size="9" font-weight="bold" fill="white">NONE</text>
+
+  <!-- Row 6: Data Plane Speed -->
+  <rect x="20" y="270" width="240" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="291" font-size="11" fill="#333">Data Plane Speed</text>
+  <rect x="270" y="270" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <text x="280" y="291" font-size="9" fill="#666">VPP kernel-bypass (400G)</text>
+  <rect x="480" y="270" width="200" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="490" y="291" font-size="9" fill="#666">Userspace WireGuard</text>
+
+  <!-- Row 7: IPsec -->
+  <rect x="20" y="304" width="240" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="325" font-size="11" fill="#333">IPsec Support</text>
+  <rect x="270" y="304" width="200" height="34" fill="#FFFBF0" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="280" y="312" width="55" height="18" rx="9" fill="#F0AD4E"/>
+  <text x="307" y="325" text-anchor="middle" font-size="9" font-weight="bold" fill="white">PARTIAL</text>
+  <rect x="480" y="304" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="490" y="312" width="45" height="18" rx="9" fill="#E74C3C"/>
+  <text x="512" y="325" text-anchor="middle" font-size="9" font-weight="bold" fill="white">NONE</text>
+
+  <!-- Row 8: NAT Traversal -->
+  <rect x="20" y="338" width="240" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="359" font-size="11" fill="#333">NAT Traversal</text>
+  <rect x="270" y="338" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <text x="280" y="359" font-size="9" fill="#666">API only, no relay binary</text>
+  <rect x="480" y="338" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <text x="490" y="359" font-size="9" fill="#666">DERP + STUN (working)</text>
+
+  <!-- Row 9: DNS -->
+  <rect x="20" y="372" width="240" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="393" font-size="11" fill="#333">DNS</text>
+  <rect x="270" y="372" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <text x="280" y="393" font-size="9" fill="#666">Config distributed only</text>
+  <rect x="480" y="372" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <text x="490" y="393" font-size="9" fill="#666">MagicDNS (working)</text>
+
+  <!-- Row 10: SSO/OIDC -->
+  <rect x="20" y="406" width="240" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="427" font-size="11" fill="#333">SSO / OIDC</text>
+  <rect x="270" y="406" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="280" y="414" width="45" height="18" rx="9" fill="#E74C3C"/>
+  <text x="302" y="427" text-anchor="middle" font-size="9" font-weight="bold" fill="white">NONE</text>
+  <rect x="480" y="406" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <rect x="490" y="414" width="30" height="18" rx="9" fill="#5CB85C"/>
+  <text x="505" y="427" text-anchor="middle" font-size="9" font-weight="bold" fill="white">YES</text>
+
+  <!-- Row 11: UI -->
+  <rect x="20" y="440" width="240" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="461" font-size="11" fill="#333">Management UI</text>
+  <rect x="270" y="440" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <text x="280" y="461" font-size="9" fill="#666">Built-in React SPA</text>
+  <rect x="480" y="440" width="200" height="34" fill="#FFF5F5" stroke="#EEE" stroke-width="0.5"/>
+  <text x="490" y="461" font-size="9" fill="#666">Community projects</text>
+
+  <!-- Row 12: Scale Design -->
+  <rect x="20" y="474" width="240" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="30" y="495" font-size="11" fill="#333">Scale Design</text>
+  <rect x="270" y="474" width="200" height="34" fill="#F0FAF0" stroke="#EEE" stroke-width="0.5"/>
+  <text x="280" y="495" font-size="9" fill="#666">Tiered, 100k target</text>
+  <rect x="480" y="474" width="200" height="34" fill="white" stroke="#EEE" stroke-width="0.5"/>
+  <text x="490" y="495" font-size="9" fill="#666">Single binary</text>
+
+  <!-- Bottom line -->
+  <rect x="20" y="524" width="660" height="40" rx="6" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="350" y="541" text-anchor="middle" font-size="11" fill="#333">Control plane is ahead. No working client = can't connect devices.</text>
+  <text x="350" y="556" text-anchor="middle" font-size="11" font-weight="bold" fill="#E09C3E">The node client is the critical path.</text>
+</svg>

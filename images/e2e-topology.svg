@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="et-a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#555"/></marker>
+    <marker id="et-ab" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4A90D9"/></marker>
+  </defs>
+
+  <text x="400" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">E2E Stack Topology</text>
+  <text x="400" y="46" text-anchor="middle" font-size="11" fill="#888">Docker Compose — isolated test environment</text>
+
+  <!-- Docker network boundary -->
+  <rect x="20" y="60" width="760" height="380" rx="10" fill="#F8F8F8" stroke="#DDD" stroke-width="2"/>
+  <text x="40" y="82" font-size="11" font-weight="bold" fill="#666">Docker Network (e2e_default)</text>
+
+  <!-- PostgreSQL -->
+  <rect x="40" y="100" width="150" height="80" rx="8" fill="#336791" stroke="#2C5F82" stroke-width="1.5"/>
+  <text x="115" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="white">PostgreSQL</text>
+  <text x="115" y="143" text-anchor="middle" font-size="10" fill="#B0D0F0">postgres:16-alpine</text>
+  <rect x="55" y="153" width="100" height="18" rx="3" fill="white" fill-opacity="0.2"/>
+  <text x="105" y="166" text-anchor="middle" font-size="9" fill="white">:5432 → :5434</text>
+
+  <!-- step-ca -->
+  <rect x="40" y="200" width="150" height="70" rx="8" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5"/>
+  <text x="115" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="white">step-ca</text>
+  <text x="115" y="243" text-anchor="middle" font-size="10" fill="white">mTLS CA</text>
+  <text x="115" y="258" text-anchor="middle" font-size="9" fill="white">:9000</text>
+
+  <!-- Controller -->
+  <rect x="240" y="100" width="180" height="100" rx="8" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1.5"/>
+  <text x="330" y="125" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Controller</text>
+  <text x="330" y="143" text-anchor="middle" font-size="10" fill="#D4E6F9">cvlan-api (controller mode)</text>
+  <rect x="255" y="155" width="60" height="18" rx="3" fill="white" fill-opacity="0.2"/>
+  <text x="285" y="168" text-anchor="middle" font-size="9" fill="white">:9080</text>
+  <rect x="325" y="155" width="80" height="18" rx="3" fill="white" fill-opacity="0.2"/>
+  <text x="365" y="168" text-anchor="middle" font-size="9" fill="white">JWT + mTLS</text>
+  <rect x="255" y="178" width="150" height="15" rx="2" fill="#3A7BC8"/>
+  <text x="330" y="189" text-anchor="middle" font-size="8" fill="white">JWT: e2e-test-secret</text>
+
+  <!-- Discovery -->
+  <rect x="240" y="220" width="180" height="80" rx="8" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1.5"/>
+  <text x="330" y="245" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Discovery</text>
+  <text x="330" y="263" text-anchor="middle" font-size="10" fill="#D4E6F9">cvlan-api (discovery mode)</text>
+  <rect x="255" y="275" width="60" height="18" rx="3" fill="white" fill-opacity="0.2"/>
+  <text x="285" y="288" text-anchor="middle" font-size="9" fill="white">:9081</text>
+
+  <!-- Arrows: Controller/Discovery → Postgres -->
+  <line x1="240" y1="145" x2="190" y2="140" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#et-ab)"/>
+  <line x1="240" y1="255" x2="190" y2="230" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#et-ab)"/>
+
+  <!-- Arrow: Controller → step-ca -->
+  <line x1="240" y1="180" x2="190" y2="215" stroke="#95A5A6" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Management UI -->
+  <rect x="470" y="100" width="150" height="70" rx="8" fill="#5BC0DE" stroke="#46B0CE" stroke-width="1.5"/>
+  <text x="545" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Management UI</text>
+  <text x="545" y="143" text-anchor="middle" font-size="10" fill="white">React + Nginx</text>
+  <rect x="505" y="148" width="80" height="15" rx="2" fill="white" fill-opacity="0.2"/>
+  <text x="545" y="159" text-anchor="middle" font-size="9" fill="white">:3000</text>
+
+  <!-- Arrow: UI → Controller -->
+  <line x1="470" y1="140" x2="420" y2="140" stroke="#5BC0DE" stroke-width="1.5" marker-end="url(#et-a)"/>
+  <text x="445" y="133" text-anchor="middle" font-size="8" fill="#555">REST</text>
+
+  <!-- VRouter (optional) -->
+  <rect x="470" y="200" width="150" height="80" rx="8" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="545" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="white">VRouter</text>
+  <text x="545" y="243" text-anchor="middle" font-size="10" fill="#D4F0D4">vrouterd (bootstrap)</text>
+  <text x="545" y="258" text-anchor="middle" font-size="9" fill="#D4F0D4">optional, --bootstrap</text>
+  <text x="545" y="272" text-anchor="middle" font-size="8" fill="#D4F0D4">software crypto (no VPP)</text>
+
+  <!-- Arrow: VRouter → Controller -->
+  <line x1="470" y1="240" x2="420" y2="175" stroke="#5CB85C" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#et-a)"/>
+  <text x="455" y="200" font-size="8" fill="#5CB85C">poll</text>
+
+  <!-- Client (optional) -->
+  <rect x="470" y="300" width="150" height="70" rx="8" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="545" y="325" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Client</text>
+  <text x="545" y="343" text-anchor="middle" font-size="10" fill="white">cvlan-ctrl</text>
+  <text x="545" y="360" text-anchor="middle" font-size="9" fill="white">optional, --client</text>
+
+  <!-- Arrow: Client → Discovery -->
+  <line x1="470" y1="335" x2="420" y2="270" stroke="#F0AD4E" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#et-a)"/>
+  <text x="453" y="305" font-size="8" fill="#E09C3E">register</text>
+
+  <!-- Test Runner -->
+  <rect x="660" y="100" width="110" height="70" rx="8" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5"/>
+  <text x="715" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Test Runner</text>
+  <text x="715" y="143" text-anchor="middle" font-size="9" fill="white">ubuntu:24.04</text>
+  <text x="715" y="157" text-anchor="middle" font-size="9" fill="white">curl + jq</text>
+
+  <!-- Arrow: Test runner → Controller -->
+  <line x1="660" y1="140" x2="620" y2="140" stroke="#95A5A6" stroke-width="1.5" marker-end="url(#et-a)"/>
+
+  <!-- Scripts section -->
+  <rect x="40" y="320" width="380" height="60" rx="6" fill="white" stroke="#DDD" stroke-width="1"/>
+  <text x="230" y="340" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Available Scripts</text>
+  <text x="120" y="358" text-anchor="middle" font-size="9" fill="#666">scripts/up [--vrouter] [--client]</text>
+  <text x="120" y="371" text-anchor="middle" font-size="9" fill="#666">scripts/down | scripts/test</text>
+  <text x="310" y="358" text-anchor="middle" font-size="9" fill="#666">scripts/token (generate JWT)</text>
+  <text x="310" y="371" text-anchor="middle" font-size="9" fill="#666">scripts/shells/shell-*</text>
+
+  <!-- Port summary -->
+  <rect x="40" y="400" width="720" height="30" rx="4" fill="#FFF9E6" stroke="#F0AD4E" stroke-width="1"/>
+  <text x="400" y="420" text-anchor="middle" font-size="10" fill="#333">Ports: Controller :9080 | Discovery :9081 | UI :3000 | Postgres :5434 | step-ca :9000 | JWT secret: e2e-test-secret</text>
+
+  <!-- Dashed boxes legend -->
+  <rect x="660" y="200" width="14" height="14" rx="3" fill="white" stroke="#999" stroke-dasharray="3,2"/>
+  <text x="680" y="212" font-size="9" fill="#666">= optional service</text>
+</svg>
