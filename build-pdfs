@@ -48,19 +48,10 @@ convert_file() {
 echo "Building PDFs..."
 echo ""
 
-# Top-level docs
-for f in "$DOCS_DIR"/README.md "$DOCS_DIR"/STATUS.md "$DOCS_DIR"/CLAUDE.md "$DOCS_DIR"/features.md; do
-  [ -f "$f" ] && convert_file "$f"
-done
-
-# Subdirectories
-for dir in architecture technical operations operations/deployment business presentations user-facing; do
-  if [ -d "$DOCS_DIR/$dir" ]; then
-    for f in "$DOCS_DIR/$dir"/*.md; do
-      [ -f "$f" ] && convert_file "$f"
-    done
-  fi
-done
+# Auto-discover all .md files, skip DOCS-REWRITE-PLAN.md
+while IFS= read -r f; do
+  convert_file "$f"
+done < <(find "$DOCS_DIR" -name "*.md" -not -path "*/pdf/*" -not -name "DOCS-REWRITE-PLAN.md" | sort)
 
 echo ""
 echo "Done: $count PDFs built, $errors failures"
