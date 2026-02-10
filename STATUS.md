@@ -1,6 +1,6 @@
 # Project Status
 
-> Last updated: Feb 9, 2026
+> Last updated: Feb 10, 2026
 
 ## State of the Project
 
@@ -40,7 +40,7 @@
 | cvland | client | cvland | Stub | 1 test | — |
 | cvlancli | client | cvlancli | Stub | 0 | — |
 | Relay | — | — | Not started | — | — |
-| E2E suite | e2e | — | Working | 6 scenarios | — |
+| E2E suite | e2e | — | Working | 6 + 2 client scenarios | — |
 | Regression | e2e | — | 7/7 pass | — | 25.5% aggregate |
 
 ## vs Headscale
@@ -128,7 +128,7 @@ The control plane is significantly ahead. But without a working client, users ca
 | **Feb 6** | Big feature day — global vRouter CRUD + tenant assignment, per-CVLAN mutex IP allocator (21K ops/s at 200 concurrency), 67 new unit tests + 31 integration tests, VPP 24.10 socket API protocol, removed cAdvisor security risk |
 | **Feb 7** | Regression suite architecture — dockerenv guards for singleton container exec, clippy/rustfmt in build Dockerfiles |
 | **Feb 8** | Dual-backend coverage — all integration tests on Postgres + SQLite, UUID BLOB storage, busy_timeout, cargo fmt (83 files), full regression suite green (7/7 stages), 47.5% line coverage baseline |
-| **Feb 9** | cvlan-ctrl client daemon — discovery/register/poll loop, SQLite state, x25519-dalek WG keys, MAC detection. Docs rewrite — 23 SVG diagrams, 18 markdown files. Extracted library modules (crypto, system, logging) with 39 integration tests, 56% coverage |
+| **Feb 9** | cvlan-ctrl client daemon — discovery/register/poll loop, SQLite state, x25519-dalek WG keys, MAC detection. Docs rewrite — 23 SVG diagrams, 18 markdown files. Extracted library modules (crypto, system, logging) with 39 integration tests, 56% coverage. Replaced placeholder cert generation with real step-ca minting for client registration (shared generic helpers with vrouter). Added `ca_chain` field to registration response. E2E client infrastructure: `--cvlan-client` bootstraps tenant/CVLAN/tokens and starts 2 nodes that register, poll, and discover each other as peers |
 
 ## Key Architecture Decisions
 

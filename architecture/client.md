@@ -16,7 +16,7 @@ The VPN client is split into three separate crates, each a separate binary. This
 
 Handles all communication with the controller:
 - **Discovery** — Find the controller URL via discovery endpoint
-- **Registration** — Register with Ed25519 token, receive cert + IP + peers
+- **Registration** — Register with Ed25519 token, receive cert + key + CA chain + IP + peers
 - **Polling** — Periodic poll for peer updates, policy changes, DNS config
 - **State** — SQLite database for node identity, peer cache, sync state
 
@@ -55,7 +55,7 @@ Introspection tool for operators:
    └── NO  → Bootstrap:
               a. Discover controller URL (if discovery_url configured)
               b. Register with Ed25519 token + WG pubkey + MAC
-              c. Save certificates to disk (0o600 on key)
+              c. Save certificates to disk (cert, key 0o600, CA chain)
               d. Store node_id, assigned_ip, cvlan_id in state.db
               e. Cache initial peer list
 5. Main poll loop (every 30 seconds):

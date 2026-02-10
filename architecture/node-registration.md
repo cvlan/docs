@@ -24,10 +24,10 @@ The registration protocol is **server-authoritative**: the admin decides which C
    - Endpoints (IP:port pairs for direct connectivity)
 6. **Server verifies** the token signature using the tenant's public key, extracts the target CVLAN
 7. **Server allocates an IP** from the CVLAN's CIDR range
-8. **Server creates a certificate** via step-ca (X.509, mTLS)
+8. **Server creates a certificate** via `StepCaClient::mint_client_cert()` — tries step-ca CLI first, falls back to self-signed (openssl) for dev/e2e
 9. **Server responds** with:
    - Node ID (UUID)
-   - Client certificate + private key + CA chain
+   - Client certificate + private key + CA chain (all real X.509 PEM)
    - Assigned IPv4 and IPv6 addresses
    - CVLAN info (name, CIDR, peers)
    - Initial peer list (all other nodes in the same CVLAN)
@@ -111,18 +111,21 @@ Response:
 
 ![Certificate Lifecycle](../images/cert-lifecycle.svg)
 
-Certificates are issued by step-ca (a lightweight ACME-compatible CA):
+Certificates are issued by step-ca (a lightweight ACME-compatible CA). Both client and vrouter use the same code path: `StepCaClient` tries the step CLI first, then falls back to openssl self-signed certs. The generic helpers (`mint_via_step_cli_generic`, `generate_self_signed_generic`) accept a subject CN and SAN, so client certs get `CN=node-{id}` / `SAN=node:{id}` while vrouter certs get `CN=vrouter-{id}` / `SAN=vrouter:{id}`.
 
 | Property | Client | VRouter |
 |----------|--------|---------|
-| Validity | 1 year | 8 hours |
-| Issuer | step-ca | step-ca |
-| Key storage | /var/lib/cvland/certs/ | /var/lib/vrouter/certs/ |
+| Validity | 1 year (8760h) | 8 hours |
+| Issuer | step-ca (self-signed fallback) | step-ca (self-signed fallback) |
+| Subject CN | `node-{uuid}` | `vrouter-{uuid}` |
+| SAN | `node:{uuid}` | `vrouter:{uuid}` |
+| Key storage | /var/lib/cvland/certs/ | /var/lib/vrouterd/certs/ |
 | Key permissions | 0o600 | 0o600 |
 | Renewal | Re-register on expiry | Re-register every 8 hours |
 | Binding | SHA256(mac + nonce) | SHA256(mac + nonce) |
+| Response field | `ca_chain` | `ca` (in CertificateResponse) |
 
-Private keys never leave the node. The CA chain is stored locally for certificate verification.
+Private keys are generated server-side by step-ca (or openssl) and returned to the node during registration. The CA chain is stored locally for certificate verification.
 
 ## Authentication Decision Tree
 
