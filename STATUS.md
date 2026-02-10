@@ -36,7 +36,7 @@
 | Management UI | ui | — | Working | eslint clean | — |
 | vrouterd | vrouter | vrouterd | Working | VPP integration | — |
 | vrouterctl | vrouter | vrouterctl | Working | — | — |
-| cvlan-ctrl | client | cvlan-ctrl | Built | 11 unit | — |
+| cvlan-ctrl | client | cvlan-ctrl | Working | 11 unit + 39 integration | 56% |
 | cvland | client | cvland | Stub | 1 test | — |
 | cvlancli | client | cvlancli | Stub | 0 | — |
 | Relay | — | — | Not started | — | — |
@@ -79,9 +79,9 @@ The control plane is significantly ahead. But without a working client, users ca
 | ui | 13 | eslint clean | Management frontend |
 | vrouter | 8 | VPP integration | VPP gateway |
 | e2e | 21 | 6 E2E + 7 regression stages | Testing infrastructure |
-| client | 3 | 13 unit | VPN client (3 crates) |
+| client | 4 | 11 unit + 39 integration | VPN client (3 crates) |
 
-**Total: 100+ commits, 8 Rust crates, 7 binaries, 527+ tests, 47.5% line coverage**
+**Total: 100+ commits, 8 Rust crates, 7 binaries, 577+ tests, 47.5% cvlan line coverage, 56% client line coverage**
 
 ## What's Next (Critical Path to First Connection)
 
@@ -128,7 +128,7 @@ The control plane is significantly ahead. But without a working client, users ca
 | **Feb 6** | Big feature day — global vRouter CRUD + tenant assignment, per-CVLAN mutex IP allocator (21K ops/s at 200 concurrency), 67 new unit tests + 31 integration tests, VPP 24.10 socket API protocol, removed cAdvisor security risk |
 | **Feb 7** | Regression suite architecture — dockerenv guards for singleton container exec, clippy/rustfmt in build Dockerfiles |
 | **Feb 8** | Dual-backend coverage — all integration tests on Postgres + SQLite, UUID BLOB storage, busy_timeout, cargo fmt (83 files), full regression suite green (7/7 stages), 47.5% line coverage baseline |
-| **Feb 9** | cvlan-ctrl client daemon — discovery/register/poll loop, SQLite state, x25519-dalek WG keys, MAC detection. Docs rewrite — 23 SVG diagrams, 18 markdown files |
+| **Feb 9** | cvlan-ctrl client daemon — discovery/register/poll loop, SQLite state, x25519-dalek WG keys, MAC detection. Docs rewrite — 23 SVG diagrams, 18 markdown files. Extracted library modules (crypto, system, logging) with 39 integration tests, 56% coverage |
 
 ## Key Architecture Decisions
 

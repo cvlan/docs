@@ -134,11 +134,17 @@ cvland     ←→ cvlancli  (tunnel stats)
 ```
 client/
 ├── cvlan-ctrl/         # Control plane daemon
-│   └── src/
-│       ├── main.rs     # Bootstrap → register → poll loop
-│       ├── config.rs   # Configuration (YAML + env)
-│       ├── state.rs    # SQLite state
-│       └── api/        # HTTP client + types
+│   ├── src/
+│   │   ├── main.rs     # Thin orchestration (bootstrap → register → poll loop)
+│   │   ├── lib.rs      # Library re-exports for tests
+│   │   ├── config.rs   # Configuration (YAML + env)
+│   │   ├── state.rs    # SQLite state
+│   │   ├── crypto.rs   # WG keypair generation, nonces, hex encoding
+│   │   ├── system.rs   # MAC address detection, hostname
+│   │   ├── logging.rs  # Tracing subscriber setup
+│   │   └── api/        # HTTP client + types + state helpers
+│   └── tests/
+│       └── mock_controller.rs  # 39 integration tests (wiremock)
 ├── cvland/             # Data plane daemon (stub)
 ├── cvlancli/           # Debug CLI (stub)
 ├── config/             # Reference config templates
@@ -148,3 +154,5 @@ client/
 **Tech stack**: Rust + x25519-dalek + rusqlite + reqwest + rustls
 
 **Binary size**: < 5MB release (LTO + strip)
+
+**Test coverage**: 56% line coverage (config 98%, state 96%, crypto 100%, logging 100%, system 91%)
