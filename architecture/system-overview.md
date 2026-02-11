@@ -93,6 +93,22 @@ VRouters and Regions are global (managed by superadmin).
 
 All shared types are defined once in Protocol Buffers (protodefs/) and generated into both Rust and TypeScript. This eliminates drift between the API server, gateway, client, and UI.
 
+## Security Posture
+
+Security-first architecture: memory-safe language (Rust), mTLS between all components, automated CVE scanning in CI, carefully chosen auth primitives (Argon2id, Ed25519, x25519, rate limiting, account lockout). Full security audit report available.
+
+Every choice below was made at project inception, not retrofitted. Patching weekends and upgrade festivals across multi-geo productions taught a hard lesson: security culture is expensive to bolt on and cheap to build in.
+
+Key design choices:
+- **No GC, no buffer overflows** — Rust with minimal `unsafe` (only VPP FFI boundaries)
+- **Parameterized queries everywhere** — sqlx compile-time checked, zero raw SQL interpolation
+- **mTLS for all data plane traffic** — step-ca issued certificates, short-lived, auto-renewed
+- **Server-authoritative model** — nodes cannot choose CVLANs or IPs, tokens are Ed25519 signed
+- **Multi-tenant isolation** — every query scoped to tenant, generic error messages prevent enumeration
+- **Non-root containers** — all services run as unprivileged users in minimal runtime images
+- **Rate limiting per endpoint** — token bucket via governor, load shedding at 5000 in-flight requests
+- **API keys hashed with Argon2** — constant-time verification, never stored in plaintext
+
 ## What's Working vs Planned
 
 | Layer | Status |
