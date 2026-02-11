@@ -10,12 +10,16 @@ The build system uses **singleton containers** — persistent Docker containers 
 
 ## Containers
 
-| Container | Base | Tools | Purpose |
-|-----------|------|-------|---------|
-| **cvlan-build** | rust:latest | cargo, sqlx, protoc, buf, clippy, rustfmt | cvlan-api + cvlanctl |
-| **vrouter-build** | custom (VPP libs) | cargo, VPP 24.10 headers, DPDK, clippy, rustfmt | vrouterd + vrouterctl |
-| **cvlan-ui-build** | node:20 | npm, vite, eslint, vitest | Management UI |
-| **client-build** | rust:latest + clang | cargo, clang, lld, cross-compile toolchain | cvlan-ctrl, cvland, cvlancli |
+All Rust build containers use `ubuntu:24.04` as base with pinned toolchains installed via rustup — not the `rust:` Docker image. This ensures hermetic, reproducible builds.
+
+| Container | Base | Rust | Tools | Purpose |
+|-----------|------|------|-------|---------|
+| **cvlan-build** | ubuntu:24.04 | 1.93.0 | cargo, sqlx, protoc, buf v1.28.1, clippy, rustfmt, cargo-llvm-cov 0.8.4 | cvlan-api + cvlanctl |
+| **vrouter-build** | ubuntu:24.04 | 1.85.0 | cargo, VPP 24.10 headers, buf v1.47.2, clippy, rustfmt | vrouterd + vrouterctl |
+| **cvlan-ui-build** | node:20-alpine | — | npm, vite, eslint, vitest, buf v1.47.2, ts-proto 2.11.2, chromium | Management UI |
+| **client-build** | ubuntu:24.04 | 1.85.0 | cargo, clang, lld, cross-compile (x86_64 + aarch64), buf v1.47.2 | cvlan-ctrl, cvland, cvlancli |
+
+Protobuf codegen tooling (`protoc-gen-prost` 0.5.0, `protoc-gen-prost-serde` 0.4.0) is consistent across all Rust containers.
 
 Each container mounts the source directory as a volume. Cargo registry and target directories are persisted in Docker volumes (prefixed `build_`).
 

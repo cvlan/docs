@@ -113,16 +113,24 @@ The management UI shows different sidebar sections depending on your role:
 
 **1. Deploy cvlan-api**
 
-Deploy the control plane API with a PostgreSQL database (or SQLite for small deployments):
+Deploy the control plane API with a PostgreSQL database (or SQLite for small deployments). See the [Self-Hosted Deployment](../operations/deployment/self-hosted.md) guide for production setup.
+
+The API runs as a single binary with configurable server modes. For a small deployment, combined mode handles everything:
 
 ```bash
-# E2E stack (quickest way to get everything running)
-cd ~/ws/e2e && make build-all && make up
+cvlan-api --mode combined \
+  --listen 0.0.0.0:8080 \
+  --discovery-listen 0.0.0.0:443 \
+  --database-url "postgres://cvlan:secret@db:5432/cvlan"
+```
 
-# Or individual deployment
-cd ~/ws/cvlan && ./scripts/deploy
-# API available at http://localhost:8081
-# Dev token saved to build/.dev-token
+For production, separate the tiers — only discovery is public-facing:
+
+```
+discovery.cloudvlan.io:443   → --mode discovery   (public, rate-limited)
+register.cloudvlan.io:8080   → --mode registration (semi-public)
+session.internal:8080        → --mode session      (mTLS only, internal)
+api.cloudvlan.io:8080        → --mode controller   (admin access)
 ```
 
 **2. Create a Tenant**
@@ -302,11 +310,8 @@ The admin CLI `cvlanctl` provides full control over the platform from the termin
 ### Connection
 
 ```bash
-# Using the dev wrapper (Docker-based, auto-detects token)
-cd ~/ws/cvlan && ./build/scripts/cvctl <command>
-
-# Direct usage
-cvlanctl --api-url http://localhost:8081 --api-key <key> <command>
+# Connect to your CloudVLAN instance
+cvlanctl --api-url https://api.cloudvlan.io --api-key <key> <command>
 ```
 
 ### Common Commands
@@ -451,7 +456,7 @@ When a node's certificate expires or needs to be refreshed, admins can generate 
 |---------|-------------|-----|
 | 401 Unauthorized | Token expired or already consumed | Generate a new token |
 | 404 Not Found | Wrong API URL or CVLAN deleted | Verify `api_url` in config |
-| Connection refused | API not running or wrong port | Check `docker ps`, verify port |
+| Connection refused | API not reachable | Verify `api_url` and network connectivity |
 | Certificate error | Wrong CA chain | Ensure client has correct `ca_chain` |
 
 ### Node shows offline
@@ -461,21 +466,11 @@ When a node's certificate expires or needs to be refreshed, admins can generate 
 - Verify network connectivity to the API endpoint
 - Check certificate expiry: `cvlancli status`
 
-### 401 errors in development
-
-Different environments use different JWT secrets:
-
-| Environment | Port | JWT Secret |
-|-------------|------|------------|
-| Dev | 8081 | `development-secret` |
-| Test | 8080 | `test-secret-key-for-integration-tests` |
-| E2E | 9080 | `e2e-test-secret` |
-
 ### UI not loading
 
-1. Check if the API is running: `curl http://localhost:8081/health`
-2. Check if the UI dev server is running: `curl http://localhost:3000`
-3. Verify the API URL environment variable: `VITE_API_URL`
+1. Check if the API is healthy: `curl https://api.cloudvlan.io/health`
+2. Check browser console for CORS or network errors
+3. Verify the UI is configured to point at the correct API endpoint
 
 ### Audit log queries return nothing
 

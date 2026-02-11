@@ -10,12 +10,16 @@ All builds and tests happen inside Docker containers. Cargo, npm, and protoc nev
 
 ### Containers
 
-| Container | Repo | Base | Tools |
-|-----------|------|------|-------|
-| **cvlan-build** | cvlan/ | rust:latest | cargo, sqlx, protoc, buf, clippy, rustfmt |
-| **vrouter-build** | vrouter/ | custom (VPP libs) | cargo, VPP 24.10 headers, DPDK |
-| **cvlan-ui-build** | ui/ | node:20 | npm, vite, eslint, vitest |
-| **client-build** | client/ | rust:latest + clang | cargo, clang, lld, cross-compile toolchain |
+All Rust build containers use `ubuntu:24.04` as base with pinned toolchains for hermetic builds. Rust is installed via rustup (not the `rust:` Docker image).
+
+| Container | Repo | Base | Rust | Key Tools |
+|-----------|------|------|------|-----------|
+| **cvlan-build** | cvlan/ | ubuntu:24.04 | 1.93.0 | cargo, sqlx, protoc, buf v1.28.1, clippy, rustfmt, cargo-llvm-cov 0.8.4 |
+| **vrouter-build** | vrouter/ | ubuntu:24.04 | 1.85.0 | cargo, VPP 24.10 headers, buf v1.47.2, clippy, rustfmt |
+| **cvlan-ui-build** | ui/ | node:20-alpine | — | npm, vite, eslint, vitest, buf v1.47.2, ts-proto 2.11.2, chromium |
+| **client-build** | client/ | ubuntu:24.04 | 1.85.0 | cargo, clang, lld, cross-compile (x86_64 + aarch64), buf v1.47.2 |
+
+Protobuf tooling is consistent: `protoc-gen-prost` 0.5.0 and `protoc-gen-prost-serde` 0.4.0 across all Rust containers.
 
 ### First Time Setup
 
