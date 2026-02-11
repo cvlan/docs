@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker>
+    <marker id="ab" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#4A90D9"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="430" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Getting Started — By Role</text>
+
+  <!-- Superadmin lane -->
+  <rect x="20" y="55" width="820" height="100" rx="8" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="40" y="78" font-size="12" font-weight="bold" fill="#4A90D9">SUPERADMIN</text>
+
+  <rect x="40" y="88" width="120" height="50" rx="6" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1"/>
+  <text x="100" y="110" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Deploy</text>
+  <text x="100" y="124" text-anchor="middle" font-size="9" fill="#D4E6F9">cvlan-api + DB</text>
+
+  <line x1="160" y1="113" x2="185" y2="113" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#ab)"/>
+
+  <rect x="190" y="88" width="120" height="50" rx="6" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1"/>
+  <text x="250" y="110" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Create Tenant</text>
+  <text x="250" y="124" text-anchor="middle" font-size="9" fill="#D4E6F9">name, slug, CIDR</text>
+
+  <line x1="310" y1="113" x2="335" y2="113" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#ab)"/>
+
+  <rect x="340" y="88" width="120" height="50" rx="6" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1"/>
+  <text x="400" y="110" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Create Users</text>
+  <text x="400" y="124" text-anchor="middle" font-size="9" fill="#D4E6F9">assign roles</text>
+
+  <line x1="460" y1="113" x2="485" y2="113" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#ab)"/>
+
+  <rect x="490" y="88" width="150" height="50" rx="6" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1"/>
+  <text x="565" y="110" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Setup vRouters</text>
+  <text x="565" y="124" text-anchor="middle" font-size="9" fill="#D4E6F9">regions, global infra</text>
+
+  <line x1="640" y1="113" x2="665" y2="113" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#ab)"/>
+
+  <rect x="670" y="88" width="150" height="50" rx="6" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1"/>
+  <text x="745" y="110" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Monitor</text>
+  <text x="745" y="124" text-anchor="middle" font-size="9" fill="#D4E6F9">audit logs, health</text>
+
+  <!-- Tenant Admin lane -->
+  <rect x="20" y="175" width="820" height="100" rx="8" fill="#F0FAF0" stroke="#5CB85C" stroke-width="1.5"/>
+  <text x="40" y="198" font-size="12" font-weight="bold" fill="#5CB85C">TENANT ADMIN</text>
+
+  <rect x="40" y="208" width="130" height="50" rx="6" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1"/>
+  <text x="105" y="230" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Create CVLANs</text>
+  <text x="105" y="244" text-anchor="middle" font-size="9" fill="#D4F0D4">CIDR, auto or manual</text>
+
+  <line x1="170" y1="233" x2="195" y2="233" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="200" y="208" width="150" height="50" rx="6" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1"/>
+  <text x="275" y="230" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Generate Tokens</text>
+  <text x="275" y="244" text-anchor="middle" font-size="9" fill="#D4F0D4">registration tokens</text>
+
+  <line x1="350" y1="233" x2="375" y2="233" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="380" y="208" width="140" height="50" rx="6" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1"/>
+  <text x="450" y="230" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Manage Users</text>
+  <text x="450" y="244" text-anchor="middle" font-size="9" fill="#D4F0D4">groups, API keys</text>
+
+  <line x1="520" y1="233" x2="545" y2="233" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="550" y="208" width="130" height="50" rx="6" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1"/>
+  <text x="615" y="230" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Set Policies</text>
+  <text x="615" y="244" text-anchor="middle" font-size="9" fill="#D4F0D4">group ACLs</text>
+
+  <line x1="680" y1="233" x2="705" y2="233" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="710" y="208" width="110" height="50" rx="6" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1"/>
+  <text x="765" y="230" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Audit</text>
+  <text x="765" y="244" text-anchor="middle" font-size="9" fill="#D4F0D4">review logs</text>
+
+  <!-- Member lane -->
+  <rect x="20" y="295" width="820" height="100" rx="8" fill="#FFF8E1" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="40" y="318" font-size="12" font-weight="bold" fill="#E09C3E">MEMBER</text>
+
+  <rect x="40" y="328" width="150" height="50" rx="6" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1"/>
+  <text x="115" y="350" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Create CVLANs</text>
+  <text x="115" y="364" text-anchor="middle" font-size="9" fill="white">within tenant scope</text>
+
+  <line x1="190" y1="353" x2="215" y2="353" stroke="#E09C3E" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="220" y="328" width="150" height="50" rx="6" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1"/>
+  <text x="295" y="350" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Register Nodes</text>
+  <text x="295" y="364" text-anchor="middle" font-size="9" fill="white">using provided token</text>
+
+  <line x1="370" y1="353" x2="395" y2="353" stroke="#E09C3E" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="400" y="328" width="150" height="50" rx="6" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1"/>
+  <text x="475" y="350" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Manage Nodes</text>
+  <text x="475" y="364" text-anchor="middle" font-size="9" fill="white">view peers, policies</text>
+
+  <!-- Readonly lane -->
+  <rect x="20" y="415" width="820" height="90" rx="8" fill="#F5F5F5" stroke="#95A5A6" stroke-width="1.5"/>
+  <text x="40" y="438" font-size="12" font-weight="bold" fill="#7F8C8D">READONLY</text>
+
+  <rect x="40" y="448" width="180" height="40" rx="6" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1"/>
+  <text x="130" y="473" text-anchor="middle" font-size="10" font-weight="bold" fill="white">View Dashboard</text>
+
+  <line x1="220" y1="468" x2="245" y2="468" stroke="#7F8C8D" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="250" y="448" width="180" height="40" rx="6" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1"/>
+  <text x="340" y="473" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Browse Resources</text>
+
+  <line x1="430" y1="468" x2="455" y2="468" stroke="#7F8C8D" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="460" y="448" width="180" height="40" rx="6" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1"/>
+  <text x="550" y="473" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Account Settings</text>
+</svg>

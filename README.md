@@ -25,6 +25,11 @@ CloudVLAN is an overlay network platform for enterprises that need secure, compl
 
 ![Repository Map](images/repo-map.svg)
 
+## Guides
+
+- **[Developer Guide](developer/developer-guide.md)** — Environment setup, build system, testing, code conventions, debugging, common mistakes
+- **[User Guide](user/user-guide.md)** — Core concepts, roles, getting started by role, UI walkthrough, CLI, node onboarding, troubleshooting
+
 ## Documentation
 
 ### Architecture

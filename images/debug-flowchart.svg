@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker>
+    <marker id="arr-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#D9534F"/></marker>
+    <marker id="arr-grn" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#5CB85C"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="360" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Debugging Methodology</text>
+  <text x="360" y="50" text-anchor="middle" font-size="11" fill="#888">One hypothesis at a time — no shotgun fixes</text>
+
+  <!-- Step 1: Observe -->
+  <rect x="230" y="70" width="260" height="60" rx="8" fill="#4A90D9" stroke="#3A7BC8" stroke-width="1.5"/>
+  <text x="360" y="95" text-anchor="middle" font-size="13" font-weight="bold" fill="white">1. Gather Diagnostics</text>
+  <text x="360" y="113" text-anchor="middle" font-size="10" fill="#D4E6F9">Logs, docker ps, error messages, git status</text>
+
+  <line x1="360" y1="130" x2="360" y2="155" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 2: Hypothesize -->
+  <rect x="230" y="160" width="260" height="60" rx="8" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1.5"/>
+  <text x="360" y="185" text-anchor="middle" font-size="13" font-weight="bold" fill="white">2. State Top Hypothesis</text>
+  <text x="360" y="203" text-anchor="middle" font-size="10" fill="white">Explain WHY this is most likely</text>
+
+  <line x1="360" y1="220" x2="360" y2="245" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 3: Cheapest test -->
+  <rect x="210" y="250" width="300" height="60" rx="8" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1.5"/>
+  <text x="360" y="275" text-anchor="middle" font-size="13" font-weight="bold" fill="white">3. Cheapest Validation First</text>
+  <text x="360" y="293" text-anchor="middle" font-size="10" fill="white">docker exec, single binary, log check — NOT full rebuild</text>
+
+  <line x1="360" y1="310" x2="360" y2="340" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Decision diamond -->
+  <polygon points="360,345 460,390 360,435 260,390" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="360" y="387" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Confirmed?</text>
+  <text x="360" y="402" text-anchor="middle" font-size="10" fill="#666">hypothesis</text>
+
+  <!-- YES path -->
+  <line x1="460" y1="390" x2="530" y2="390" stroke="#5CB85C" stroke-width="2" marker-end="url(#arr-grn)"/>
+  <text x="495" y="383" font-size="11" font-weight="bold" fill="#5CB85C">YES</text>
+
+  <rect x="535" y="365" width="160" height="50" rx="8" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1.5"/>
+  <text x="615" y="387" text-anchor="middle" font-size="12" font-weight="bold" fill="white">4. Fix It</text>
+  <text x="615" y="403" text-anchor="middle" font-size="10" fill="white">ONE targeted change</text>
+
+  <!-- Arrow from Fix → Verify -->
+  <line x1="615" y1="415" x2="615" y2="455" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arr-grn)"/>
+
+  <rect x="535" y="460" width="160" height="50" rx="8" fill="#5CB85C" stroke="#4CAE4C" stroke-width="1.5"/>
+  <text x="615" y="482" text-anchor="middle" font-size="12" font-weight="bold" fill="white">5. Verify</text>
+  <text x="615" y="498" text-anchor="middle" font-size="10" fill="white">Run the test that failed</text>
+
+  <!-- NO path -->
+  <line x1="260" y1="390" x2="170" y2="390" stroke="#D9534F" stroke-width="2" marker-end="url(#arr-red)"/>
+  <text x="215" y="383" font-size="11" font-weight="bold" fill="#D9534F">NO</text>
+
+  <rect x="30" y="365" width="140" height="50" rx="8" fill="#D9534F" stroke="#C9302C" stroke-width="1.5"/>
+  <text x="100" y="387" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Reject &amp;</text>
+  <text x="100" y="403" text-anchor="middle" font-size="10" fill="white">Document why</text>
+
+  <!-- Arrow: Reject → back to Hypothesize -->
+  <path d="M 100 365 L 100 190 L 225 190" fill="none" stroke="#D9534F" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <text x="85" y="280" font-size="9" fill="#D9534F" transform="rotate(-90,85,280)">next hypothesis</text>
+
+  <!-- Anti-patterns box -->
+  <rect x="30" y="460" width="460" height="80" rx="8" fill="#FFF0F0" stroke="#D9534F" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="50" y="483" font-size="12" font-weight="bold" fill="#D9534F">Anti-Patterns (DO NOT)</text>
+  <text x="50" y="502" font-size="10" fill="#555">- Try 3 fixes at once hoping one works (shotgun debugging)</text>
+  <text x="50" y="517" font-size="10" fill="#555">- Skip diagnostics and jump to code changes</text>
+  <text x="50" y="532" font-size="10" fill="#555">- Do a full rebuild to test a log output hypothesis</text>
+</svg>

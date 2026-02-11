@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 440" font-family="Arial, Helvetica, sans-serif">
+  <!-- Title -->
+  <text x="390" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Roles &amp; Permissions</text>
+  <text x="390" y="50" text-anchor="middle" font-size="11" fill="#888">What each role can do in CloudVLAN</text>
+
+  <!-- Table header -->
+  <rect x="20" y="70" width="740" height="35" rx="4" fill="#4A90D9"/>
+  <text x="135" y="93" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Permission</text>
+  <line x1="250" y1="70" x2="250" y2="105" stroke="white" stroke-opacity="0.3"/>
+  <text x="330" y="93" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Superadmin</text>
+  <line x1="410" y1="70" x2="410" y2="105" stroke="white" stroke-opacity="0.3"/>
+  <text x="490" y="93" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Tenant Admin</text>
+  <line x1="570" y1="70" x2="570" y2="105" stroke="white" stroke-opacity="0.3"/>
+  <text x="630" y="93" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Member</text>
+  <line x1="690" y1="70" x2="690" y2="105" stroke="white" stroke-opacity="0.3"/>
+  <text x="730" y="93" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Readonly</text>
+
+  <!-- Row function -->
+  <!-- Row 1: Global infra -->
+  <rect x="20" y="105" width="740" height="40" fill="#F8F8F8"/>
+  <text x="40" y="130" font-size="11" fill="#333">Manage tenants, regions, relays, global vRouters</text>
+  <circle cx="330" cy="125" r="10" fill="#5CB85C"/><text x="330" y="129" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="490" cy="125" r="10" fill="#EEEEEE"/><text x="490" y="129" text-anchor="middle" font-size="12" fill="#CCC">&#10007;</text>
+  <circle cx="630" cy="125" r="10" fill="#EEEEEE"/><text x="630" y="129" text-anchor="middle" font-size="12" fill="#CCC">&#10007;</text>
+  <circle cx="730" cy="125" r="10" fill="#EEEEEE"/><text x="730" y="129" text-anchor="middle" font-size="12" fill="#CCC">&#10007;</text>
+
+  <!-- Row 2: Identity -->
+  <rect x="20" y="145" width="740" height="40" fill="white"/>
+  <text x="40" y="170" font-size="11" fill="#333">Manage users, groups, API keys</text>
+  <circle cx="330" cy="165" r="10" fill="#5CB85C"/><text x="330" y="169" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="490" cy="165" r="10" fill="#5CB85C"/><text x="490" y="169" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="630" cy="165" r="10" fill="#EEEEEE"/><text x="630" y="169" text-anchor="middle" font-size="12" fill="#CCC">&#10007;</text>
+  <circle cx="730" cy="165" r="10" fill="#EEEEEE"/><text x="730" y="169" text-anchor="middle" font-size="12" fill="#CCC">&#10007;</text>
+
+  <!-- Row 3: Network -->
+  <rect x="20" y="185" width="740" height="40" fill="#F8F8F8"/>
+  <text x="40" y="210" font-size="11" fill="#333">Manage CVLANs, nodes, policies</text>
+  <circle cx="330" cy="205" r="10" fill="#5CB85C"/><text x="330" y="209" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="490" cy="205" r="10" fill="#5CB85C"/><text x="490" y="209" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="630" cy="205" r="10" fill="#5CB85C"/><text x="630" y="209" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="730" cy="205" r="10" fill="#EEEEEE"/><text x="730" y="209" text-anchor="middle" font-size="12" fill="#CCC">&#10007;</text>
+
+  <!-- Row 4: Audit -->
+  <rect x="20" y="225" width="740" height="40" fill="white"/>
+  <text x="40" y="250" font-size="11" fill="#333">View audit logs</text>
+  <circle cx="330" cy="245" r="10" fill="#5CB85C"/><text x="330" y="249" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="490" cy="245" r="10" fill="#5CB85C"/><text x="490" y="249" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="630" cy="245" r="10" fill="#EEEEEE"/><text x="630" y="249" text-anchor="middle" font-size="12" fill="#CCC">&#10007;</text>
+  <circle cx="730" cy="245" r="10" fill="#EEEEEE"/><text x="730" y="249" text-anchor="middle" font-size="12" fill="#CCC">&#10007;</text>
+
+  <!-- Row 5: View -->
+  <rect x="20" y="265" width="740" height="40" fill="#F8F8F8"/>
+  <text x="40" y="290" font-size="11" fill="#333">View all resources (read-only)</text>
+  <circle cx="330" cy="285" r="10" fill="#5CB85C"/><text x="330" y="289" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="490" cy="285" r="10" fill="#5CB85C"/><text x="490" y="289" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="630" cy="285" r="10" fill="#5CB85C"/><text x="630" y="289" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="730" cy="285" r="10" fill="#5CB85C"/><text x="730" y="289" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+
+  <!-- Row 6: Account -->
+  <rect x="20" y="305" width="740" height="40" fill="white"/>
+  <text x="40" y="330" font-size="11" fill="#333">Change own password / account settings</text>
+  <circle cx="330" cy="325" r="10" fill="#5CB85C"/><text x="330" y="329" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="490" cy="325" r="10" fill="#5CB85C"/><text x="490" y="329" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="630" cy="325" r="10" fill="#5CB85C"/><text x="630" y="329" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+  <circle cx="730" cy="325" r="10" fill="#5CB85C"/><text x="730" y="329" text-anchor="middle" font-size="12" fill="white">&#10003;</text>
+
+  <!-- Border -->
+  <rect x="20" y="70" width="740" height="280" rx="4" fill="none" stroke="#DDD" stroke-width="1"/>
+
+  <!-- UI visibility note -->
+  <rect x="20" y="370" width="740" height="55" rx="8" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1"/>
+  <text x="40" y="393" font-size="11" font-weight="bold" fill="#4A90D9">UI Sidebar Visibility</text>
+  <text x="40" y="412" font-size="10" fill="#555">Superadmin / Tenant Admin: Full sidebar (Network, Identity, Admin sections)</text>
+  <text x="450" y="412" font-size="10" fill="#555">Member / Readonly: Network section only + Account dropdown</text>
+</svg>

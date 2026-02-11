@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 540" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#555"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="430" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">CloudVLAN Core Concepts</text>
+
+  <!-- Platform level -->
+  <rect x="20" y="55" width="820" height="470" rx="12" fill="#FAFAFA" stroke="#DDD" stroke-width="1"/>
+  <text x="40" y="78" font-size="12" font-weight="bold" fill="#888">CLOUDVLAN PLATFORM</text>
+
+  <!-- Global resources (superadmin) -->
+  <rect x="530" y="90" width="290" height="120" rx="8" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="550" y="113" font-size="11" font-weight="bold" fill="#4A90D9">Global Resources (superadmin)</text>
+
+  <rect x="545" y="125" width="75" height="30" rx="4" fill="#4A90D9"/>
+  <text x="582" y="145" text-anchor="middle" font-size="9" fill="white">Regions</text>
+  <rect x="630" y="125" width="75" height="30" rx="4" fill="#5CB85C"/>
+  <text x="667" y="145" text-anchor="middle" font-size="9" fill="white">vRouters</text>
+  <rect x="715" y="125" width="75" height="30" rx="4" fill="#95A5A6"/>
+  <text x="752" y="145" text-anchor="middle" font-size="9" fill="white">Relays</text>
+  <rect x="545" y="165" width="120" height="30" rx="4" fill="#4A90D9"/>
+  <text x="605" y="185" text-anchor="middle" font-size="9" fill="white">Discovery Servers</text>
+
+  <!-- Tenant 1 -->
+  <rect x="40" y="90" width="470" height="415" rx="10" fill="#F0FAF0" stroke="#5CB85C" stroke-width="2"/>
+  <text x="60" y="115" font-size="13" font-weight="bold" fill="#5CB85C">Tenant: Acme Corp</text>
+  <text x="60" y="132" font-size="10" fill="#888">slug: acme-corp | identifier: acme.cloudvlan.io</text>
+
+  <!-- Users box -->
+  <rect x="330" y="145" width="160" height="80" rx="6" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <text x="350" y="165" font-size="10" font-weight="bold" fill="#5CB85C">Users</text>
+  <text x="350" y="182" font-size="9" fill="#555">alice (tenantadmin)</text>
+  <text x="350" y="196" font-size="9" fill="#555">bob (member)</text>
+  <text x="350" y="210" font-size="9" fill="#555">carol (readonly)</text>
+
+  <!-- Groups box -->
+  <rect x="330" y="240" width="160" height="65" rx="6" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <text x="350" y="260" font-size="10" font-weight="bold" fill="#5CB85C">Groups</text>
+  <text x="350" y="277" font-size="9" fill="#555">engineering</text>
+  <text x="350" y="291" font-size="9" fill="#555">ops-team</text>
+
+  <!-- Policies box -->
+  <rect x="330" y="320" width="160" height="65" rx="6" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <text x="350" y="340" font-size="10" font-weight="bold" fill="#5CB85C">Policies</text>
+  <text x="350" y="357" font-size="9" fill="#555">engineering ↔ ops: allow</text>
+  <text x="350" y="371" font-size="9" fill="#555">default: deny</text>
+
+  <!-- CVLAN 1 -->
+  <rect x="60" y="145" width="250" height="155" rx="8" fill="white" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="80" y="168" font-size="11" font-weight="bold" fill="#E09C3E">CVLAN: office-net</text>
+  <text x="80" y="184" font-size="9" fill="#888">10.100.0.0/24 (252 usable IPs)</text>
+
+  <!-- Nodes -->
+  <rect x="75" y="195" width="100" height="40" rx="5" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1"/>
+  <text x="125" y="212" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Node: laptop-1</text>
+  <text x="125" y="226" text-anchor="middle" font-size="8" fill="white">10.100.0.1</text>
+
+  <rect x="190" y="195" width="100" height="40" rx="5" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1"/>
+  <text x="240" y="212" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Node: server-1</text>
+  <text x="240" y="226" text-anchor="middle" font-size="8" fill="white">10.100.0.2</text>
+
+  <!-- Node connection -->
+  <line x1="175" y1="215" x2="190" y2="215" stroke="#E09C3E" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="182" y="210" text-anchor="middle" font-size="7" fill="#E09C3E">WG</text>
+
+  <!-- Reg token -->
+  <rect x="75" y="248" width="220" height="35" rx="4" fill="#FFF8E1" stroke="#F0AD4E" stroke-width="1"/>
+  <text x="85" y="265" font-size="9" fill="#E09C3E">Registration Token:</text>
+  <text x="85" y="278" font-size="8" font-family="monospace" fill="#555">Ed25519-signed → encodes CVLAN</text>
+
+  <!-- CVLAN 2 -->
+  <rect x="60" y="320" width="250" height="110" rx="8" fill="white" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="80" y="343" font-size="11" font-weight="bold" fill="#E09C3E">CVLAN: lab-net</text>
+  <text x="80" y="359" font-size="9" fill="#888">10.200.0.0/16 (65,534 usable IPs)</text>
+
+  <rect x="75" y="370" width="100" height="40" rx="5" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1"/>
+  <text x="125" y="387" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Node: lab-vm-1</text>
+  <text x="125" y="401" text-anchor="middle" font-size="8" fill="white">10.200.0.1</text>
+
+  <rect x="190" y="370" width="100" height="40" rx="5" fill="#F0AD4E" stroke="#E09C3E" stroke-width="1"/>
+  <text x="240" y="387" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Node: lab-vm-2</text>
+  <text x="240" y="401" text-anchor="middle" font-size="8" fill="white">10.200.0.2</text>
+
+  <!-- API Keys -->
+  <rect x="330" y="400" width="160" height="50" rx="6" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <text x="350" y="420" font-size="10" font-weight="bold" fill="#5CB85C">API Keys</text>
+  <text x="350" y="437" font-size="9" fill="#555">Argon2-hashed, scoped</text>
+
+  <!-- Audit Logs -->
+  <rect x="330" y="460" width="160" height="35" rx="6" fill="white" stroke="#5CB85C" stroke-width="1"/>
+  <text x="350" y="483" font-size="10" font-weight="bold" fill="#5CB85C">Audit Logs (90-day)</text>
+
+  <!-- Arrow: Groups → Policies -->
+  <line x1="410" y1="305" x2="410" y2="315" stroke="#555" stroke-width="1" marker-end="url(#ar)"/>
+
+  <!-- Isolation label -->
+  <rect x="530" y="240" width="290" height="55" rx="8" fill="#FFF0F0" stroke="#D9534F" stroke-width="1.5"/>
+  <text x="675" y="263" text-anchor="middle" font-size="11" font-weight="bold" fill="#D9534F">Tenant Isolation</text>
+  <text x="675" y="282" text-anchor="middle" font-size="10" fill="#555">Tenant A never sees Tenant B's data</text>
+
+  <!-- Key insight -->
+  <rect x="530" y="310" width="290" height="55" rx="8" fill="#F0FAF0" stroke="#5CB85C" stroke-width="1.5"/>
+  <text x="675" y="333" text-anchor="middle" font-size="11" font-weight="bold" fill="#5CB85C">Server-Authoritative</text>
+  <text x="675" y="352" text-anchor="middle" font-size="10" fill="#555">Server assigns CVLAN, IP, and policies</text>
+
+  <!-- IP alloc insight -->
+  <rect x="530" y="380" width="290" height="55" rx="8" fill="#FFF8E1" stroke="#F0AD4E" stroke-width="1.5"/>
+  <text x="675" y="403" text-anchor="middle" font-size="11" font-weight="bold" fill="#E09C3E">Per-CVLAN IP Space</text>
+  <text x="675" y="422" text-anchor="middle" font-size="10" fill="#555">Each CVLAN has independent CIDR allocation</text>
+
+  <!-- mTLS insight -->
+  <rect x="530" y="450" width="290" height="55" rx="8" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="675" y="473" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A90D9">mTLS Certificates</text>
+  <text x="675" y="492" text-anchor="middle" font-size="10" fill="#555">Nodes get certs at registration via step-ca</text>
+</svg>

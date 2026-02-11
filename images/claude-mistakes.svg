@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 620" font-family="Arial, Helvetica, sans-serif">
+  <!-- Title -->
+  <text x="430" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Common Mistakes in AI-Assisted Development</text>
+  <text x="430" y="50" text-anchor="middle" font-size="11" fill="#888">Real incidents from CloudVLAN development with Claude Code</text>
+
+  <!-- Category 1: Build System -->
+  <rect x="20" y="70" width="400" height="160" rx="8" fill="#FFF0F0" stroke="#D9534F" stroke-width="1.5"/>
+  <rect x="20" y="70" width="400" height="30" rx="8" fill="#D9534F"/>
+  <rect x="20" y="90" width="400" height="10" fill="#D9534F"/>
+  <text x="220" y="91" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Build System Violations</text>
+
+  <circle cx="40" cy="120" r="6" fill="#D9534F"/>
+  <text x="55" y="124" font-size="10" fill="#333">Running <tspan font-family="monospace" font-size="9">cargo build</tspan> on host machine</text>
+
+  <circle cx="40" cy="145" r="6" fill="#D9534F"/>
+  <text x="55" y="149" font-size="10" fill="#333">Raw <tspan font-family="monospace" font-size="9">docker compose run --rm dev cargo ...</tspan></text>
+
+  <circle cx="40" cy="170" r="6" fill="#D9534F"/>
+  <text x="55" y="174" font-size="10" fill="#333">Multi-line docker commands instead of scripts</text>
+
+  <circle cx="40" cy="195" r="6" fill="#D9534F"/>
+  <text x="55" y="199" font-size="10" fill="#333">Testing against build volume binary, not Docker image</text>
+
+  <rect x="300" y="110" width="110" height="28" rx="4" fill="#5CB85C"/>
+  <text x="355" y="129" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Use wrappers!</text>
+
+  <!-- Category 2: Security -->
+  <rect x="440" y="70" width="400" height="160" rx="8" fill="#FFF0F0" stroke="#D9534F" stroke-width="1.5"/>
+  <rect x="440" y="70" width="400" height="30" rx="8" fill="#D9534F"/>
+  <rect x="440" y="90" width="400" height="10" fill="#D9534F"/>
+  <text x="640" y="91" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Security Violations</text>
+
+  <circle cx="460" cy="120" r="6" fill="#D9534F"/>
+  <text x="475" y="124" font-size="10" fill="#333">Adding cAdvisor with <tspan font-family="monospace" font-size="9">privileged: true</tspan></text>
+
+  <circle cx="460" cy="145" r="6" fill="#D9534F"/>
+  <text x="475" y="149" font-size="10" fill="#333">Host filesystem mounts (<tspan font-family="monospace" font-size="9">/:/rootfs:ro</tspan>)</text>
+
+  <circle cx="460" cy="170" r="6" fill="#D9534F"/>
+  <text x="475" y="174" font-size="10" fill="#333">Dropping security for test convenience</text>
+
+  <circle cx="460" cy="195" r="6" fill="#D9534F"/>
+  <text x="475" y="199" font-size="10" fill="#333">Third-party images with broad host access</text>
+
+  <rect x="720" y="110" width="110" height="28" rx="4" fill="#5CB85C"/>
+  <text x="775" y="129" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Never trade off</text>
+
+  <!-- Category 3: Shell Scripting -->
+  <rect x="20" y="250" width="400" height="160" rx="8" fill="#FFF8E1" stroke="#F0AD4E" stroke-width="1.5"/>
+  <rect x="20" y="250" width="400" height="30" rx="8" fill="#F0AD4E"/>
+  <rect x="20" y="270" width="400" height="10" fill="#F0AD4E"/>
+  <text x="220" y="271" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Shell Scripting Pitfalls</text>
+
+  <circle cx="40" cy="300" r="6" fill="#F0AD4E"/>
+  <text x="55" y="304" font-size="10" fill="#333">macOS bash 3.2: <tspan font-family="monospace" font-size="9">declare -A</tspan> not available</text>
+
+  <circle cx="40" cy="325" r="6" fill="#F0AD4E"/>
+  <text x="55" y="329" font-size="10" fill="#333"><tspan font-family="monospace" font-size="9">grep -c ... || echo 0</tspan> produces double output</text>
+
+  <circle cx="40" cy="350" r="6" fill="#F0AD4E"/>
+  <text x="55" y="354" font-size="10" fill="#333">Vitest hangs without <tspan font-family="monospace" font-size="9">-- --run</tspan> flag</text>
+
+  <circle cx="40" cy="375" r="6" fill="#F0AD4E"/>
+  <text x="55" y="379" font-size="10" fill="#333">Missing rustfmt/clippy in custom Dockerfiles</text>
+
+  <rect x="300" y="295" width="110" height="28" rx="4" fill="#5CB85C"/>
+  <text x="355" y="314" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Test on macOS</text>
+
+  <!-- Category 4: Over-Engineering -->
+  <rect x="440" y="250" width="400" height="160" rx="8" fill="#FFF8E1" stroke="#F0AD4E" stroke-width="1.5"/>
+  <rect x="440" y="250" width="400" height="30" rx="8" fill="#F0AD4E"/>
+  <rect x="440" y="270" width="400" height="10" fill="#F0AD4E"/>
+  <text x="640" y="271" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Over-Engineering</text>
+
+  <circle cx="460" cy="300" r="6" fill="#F0AD4E"/>
+  <text x="475" y="304" font-size="10" fill="#333">Making fields optional when a simple default works</text>
+
+  <circle cx="460" cy="325" r="6" fill="#F0AD4E"/>
+  <text x="475" y="329" font-size="10" fill="#333">Abstract wrappers for one-time operations</text>
+
+  <circle cx="460" cy="350" r="6" fill="#F0AD4E"/>
+  <text x="475" y="354" font-size="10" fill="#333">Feature flags instead of just changing the code</text>
+
+  <circle cx="460" cy="375" r="6" fill="#F0AD4E"/>
+  <text x="475" y="379" font-size="10" fill="#333">Backwards-compat shims for unused code paths</text>
+
+  <rect x="720" y="295" width="110" height="28" rx="4" fill="#5CB85C"/>
+  <text x="775" y="314" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Keep it simple</text>
+
+  <!-- Category 5: Debugging -->
+  <rect x="20" y="430" width="400" height="170" rx="8" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1.5"/>
+  <rect x="20" y="430" width="400" height="30" rx="8" fill="#4A90D9"/>
+  <rect x="20" y="450" width="400" height="10" fill="#4A90D9"/>
+  <text x="220" y="451" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Debugging Anti-Patterns</text>
+
+  <circle cx="40" cy="480" r="6" fill="#4A90D9"/>
+  <text x="55" y="484" font-size="10" fill="#333">Shotgun: trying 3 fixes simultaneously</text>
+
+  <circle cx="40" cy="505" r="6" fill="#4A90D9"/>
+  <text x="55" y="509" font-size="10" fill="#333">Full rebuild to test a log-level hypothesis</text>
+
+  <circle cx="40" cy="530" r="6" fill="#4A90D9"/>
+  <text x="55" y="534" font-size="10" fill="#333">Skipping diagnostics, jumping to code changes</text>
+
+  <circle cx="40" cy="555" r="6" fill="#4A90D9"/>
+  <text x="55" y="559" font-size="10" fill="#333">Moving to next hypothesis before confirming/rejecting</text>
+
+  <circle cx="40" cy="580" r="6" fill="#4A90D9"/>
+  <text x="55" y="584" font-size="10" fill="#333">Not reading existing CLAUDE.md before working in repo</text>
+
+  <!-- Category 6: Data/Format -->
+  <rect x="440" y="430" width="400" height="170" rx="8" fill="#EBF2FA" stroke="#4A90D9" stroke-width="1.5"/>
+  <rect x="440" y="430" width="400" height="30" rx="8" fill="#4A90D9"/>
+  <rect x="440" y="450" width="400" height="10" fill="#4A90D9"/>
+  <text x="640" y="451" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Data &amp; Format Mistakes</text>
+
+  <circle cx="460" cy="480" r="6" fill="#4A90D9"/>
+  <text x="475" y="484" font-size="10" fill="#333">Role names: <tspan font-family="monospace" font-size="9">super_admin</tspan> instead of <tspan font-family="monospace" font-size="9">superadmin</tspan></text>
+
+  <circle cx="460" cy="505" r="6" fill="#4A90D9"/>
+  <text x="475" y="509" font-size="10" fill="#333">SQLite UUIDs are BLOBs, not TEXT (sqlx 0.8)</text>
+
+  <circle cx="460" cy="530" r="6" fill="#4A90D9"/>
+  <text x="475" y="534" font-size="10" fill="#333">Postgres <tspan font-family="monospace" font-size="9">host()</tspan> function doesn't exist in SQLite</text>
+
+  <circle cx="460" cy="555" r="6" fill="#4A90D9"/>
+  <text x="475" y="559" font-size="10" fill="#333">Wrong JWT secret per environment (dev/test/e2e)</text>
+
+  <circle cx="460" cy="580" r="6" fill="#4A90D9"/>
+  <text x="475" y="584" font-size="10" fill="#333">Docker MAC on tunnel interfaces (non-Ethernet)</text>
+</svg>

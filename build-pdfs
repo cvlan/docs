@@ -23,7 +23,13 @@ PANDOC_OPTS=(
 )
 
 count=0
+skipped=0
 errors=0
+force=0
+
+if [ "${1:-}" = "--force" ] || [ "${1:-}" = "-f" ]; then
+  force=1
+fi
 
 convert_file() {
   local md_file="$1"
@@ -33,6 +39,12 @@ convert_file() {
   local pdf_file="$PDF_DIR/$pdf_name"
   local resource_dir
   resource_dir="$(dirname "$md_file")"
+
+  # Skip if PDF exists and is newer than the markdown source
+  if [ "$force" -eq 0 ] && [ -f "$pdf_file" ] && [ "$pdf_file" -nt "$md_file" ]; then
+    skipped=$((skipped + 1))
+    return
+  fi
 
   printf "  %-50s → %s\n" "$rel_path" "$pdf_name"
   if pandoc "$md_file" -o "$pdf_file" \
@@ -45,7 +57,7 @@ convert_file() {
   fi
 }
 
-echo "Building PDFs..."
+echo "Building PDFs...$([ "$force" -eq 1 ] && echo ' (forced rebuild)')"
 echo ""
 
 # Auto-discover all .md files, skip DOCS-REWRITE-PLAN.md
@@ -54,5 +66,5 @@ while IFS= read -r f; do
 done < <(find "$DOCS_DIR" -name "*.md" -not -path "*/pdf/*" -not -name "DOCS-REWRITE-PLAN.md" | sort)
 
 echo ""
-echo "Done: $count PDFs built, $errors failures"
+echo "Done: $count built, $skipped unchanged, $errors failures"
 echo "Output: $PDF_DIR/"

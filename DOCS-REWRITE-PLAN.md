@@ -73,6 +73,12 @@ docs/
 ├── presentations/                         # KEEP AS-IS
 │   └── vc-pitch.md
 │
+├── developer/
+│   └── developer-guide.md                 # Dev environment, conventions, debugging, Claude mistakes
+│
+├── user/
+│   └── user-guide.md                      # Concepts, roles, getting started, UI, CLI, troubleshooting
+│
 ├── user-facing/                           # KEEP AS-IS
 │   └── positioning.md
 │
@@ -99,7 +105,15 @@ docs/
     ├── regression-pipeline.svg
     ├── e2e-topology.svg
     ├── timeline.svg
-    └── feature-comparison.svg
+    ├── feature-comparison.svg
+    ├── dev-workflow.svg                   # Development lifecycle
+    ├── debug-flowchart.svg                # Debugging methodology
+    ├── claude-mistakes.svg                # Common AI-assisted dev pitfalls
+    ├── user-roles-permissions.svg         # IAM role matrix
+    ├── getting-started-flow.svg           # Per-role onboarding
+    ├── cvlan-concepts.svg                 # Tenant/CVLAN/Node model
+    ├── node-onboarding.svg                # Node registration flow
+    └── ui-navigation.svg                  # UI layout by role
 ```
 
 ## Files to DELETE
